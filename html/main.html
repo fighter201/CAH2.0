@@ -8,7 +8,6 @@
         <script type="text/javascript"> console.log("before defer script");</script>
 		<script defer src="../js/main_functionality.js"></script>
 		<script type="text/javascript"> console.log("after defer script");</script>
-        <script>const maxNickname=32</script>
 	</head>
 
 	<body>
@@ -38,28 +37,7 @@
         </footer>
         
         <script>
-            function setNickname() {
-                var input = document.getElementById('nickname').value;
-                if (input==='') {
-                    //TODO please enternickname
-                    return false;
-                } else if (input.length) {
-
-                }
-                return true;
-            }
-
-            function createGame() {
-                if (setNickname()) {
-                    window.location.href='/createGame.html';
-                }
-            }
-
-            function joinGame() {
-                if (setNickname()) {
-                    window.location.href='/joinGame.html';
-                }
-            }
+            
         </script>
     </body>
 </html>

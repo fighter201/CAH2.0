@@ -4,6 +4,7 @@ const inputNickname = document.getElementById('nickname');
 const btnCreate = document.getElementById('btnCreate');
 const btnJoin = document.getElementById('btnJoin');
 const btnCheck = document.getElementById('validate');
+const maxNickname = 32;
 let nickname;
 
 //useful functions ================================================
@@ -30,18 +31,9 @@ function removeClass(element, theClass){
 
 function checkNickname(){
 	console.log("nickname:"+inputNickname.value);
-	if(inputNickname.value.isEmpty){
-		btnCreate.disabled = true;
-		btnJoin.disabled = true;
-		console.log("disabled");
-	}
-	else{
-		btnCreate.disabled = false;
-		btnJoin.disabled = false;
-		console.log("enabled");
-	}
 	
-	if(empty(inputNickname.value)){
+	if(empty(inputNickname.value) || inputNickname.value.length > maxNickname){
+		btnCreate.disabled = true;
 		btnJoin.disabled = true;
 		console.log("disabled");
 	}
@@ -52,7 +44,6 @@ function checkNickname(){
 	}
 }
 
-
 inputNickname.addEventListener('keyup', function(){
 	checkNickname();
 });
@@ -62,6 +53,23 @@ btnCheck.addEventListener('click', function(){ //evtl. nutzen, um gleiche Nickna
 	if(btnCreate.enabled) switchClass(inputNickname, 'valid', 'invalid');
 	else{ switchClass(inputNickname, 'invalid', 'valid'); }
 });*/
+
+//nickname to sessionvariable
+function saveNickname(){
+	window.sessionStorage.setItem(nickname, inputNickname);
+}
+
+//button onclick
+function createGame() {
+	saveNickname();
+	window.location.href='/createGame.html';
+}
+
+//button onclick
+function joinGame() {
+	saveNickname();
+	window.location.href='/joinGame.html';
+}
 
 window.onload = function(){
 	console.log("window onload event");

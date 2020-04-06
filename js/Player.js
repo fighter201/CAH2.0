@@ -16,9 +16,25 @@ class Player {
         this.nickname = nickname;
     }
 
-   valueOf(){
-       return this.#id;
-   }
+    addWC(WC){
+        this.#hand.push(WC);
+    }
+
+    numHand(){
+        return this.#hand.length;
+    }
+
+    get score(){
+        return this.#score;
+    }
+
+    won(){
+        this.#score++;
+    }
+
+    valueOf(){
+        return this.#id;
+    }
 
 }
 
