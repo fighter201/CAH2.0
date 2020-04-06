@@ -6,6 +6,9 @@
 	--secondary: orange;
 	--tertiary: hsl(99,37%,45%);
 	
+	--right: green;
+	--wrong: red;
+	
 	/*basic vars (behaviour)*/
 	--hoverColor: var(--tertiary);
 	--tt: 0.8s;
@@ -27,9 +30,6 @@
 	background-color: var(--tertiary);
 	color: var(--background);
 	text-shadow: none;
-}
-html{
-	-webkit-text-size-adjust: none;
 }
 
 ul, ol{
@@ -89,11 +89,15 @@ button{
 	
 	transition: background var(--tt), border var(--tt), box-shadow var(--tt), color var(--tt);
 }
-button:hover{
+button:hover:enabled {
 	background: var(--primary);
 	color: white;
 	border: 1px solid var(--primary);
 	box-shadow: 0px 0px 3px var(--primary);
+}
+button:disabled{
+	color: lightgrey;
+	border: 1px solid lightgrey;
 }
 
 /*========================================spezifische styles==============================================*/
@@ -157,14 +161,28 @@ footer a:hover{
 	header{
 		font-size: 2vh;
 	}
+	main{
+	  flex-grow: 1;
+  }
 	button{
 		margin: 20px;
 		border: 2px solid grey;
 		box-shadow: 0px 0px 4px grey;
 	}
+	button:disabled{
+	 color: lightgrey;
+	 border: 2px solid lightgrey;
+  }
 	input[type="text"]{
 		margin: 20px;
 		border: 2px solid var(--borderColor);
 		box-shadow: 0px 0px 4px var(--borderColor);
+		border-radius: 15px;
 	}
+	/*
+	footer{
+		position: absolute;
+	  right: 0;
+		bottom:0;
+	}*/
 }

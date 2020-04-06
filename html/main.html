@@ -1,11 +1,19 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Welcome | Cards Against Humanity</title>
 		<link rel="icon" href="img/icon.png" type="images/x-icon">
+		<meta charset="utf-8">
 		
 		<link rel="stylesheet" href="../css/cah2.css">
-        <link rel="stylesheet" href="../css/main.css">
-        <script>const maxNickname=32</script>
+
+		<link rel="stylesheet" href="../css/main.css">
+		
+		<script type="text/javascript"> console.log("before defer script");</script>
+		<script defer src="../js/main_functionality.js"></script>
+		<script type="text/javascript"> console.log("after defer script");</script>
+    <script>const maxNickname=32</script>
+
 	</head>
 
 	<body>
@@ -16,12 +24,12 @@
 			<div id="content">
 				<h2 id="welcome">Welcome to Cards Against Humanity!</h2>
 				<ul>
-				<li><div>
+				<li id="nickLine"><div>
 					<label for="nickname">Choose your nickname:</label>
-					<input name="nickname" id="nickname" type="text">
+					<input name="nickname" id="nickname" type="text" oninvalid="checkNickname()" required>
+					<button id="validate" hidden>Check</button> <!--evtl später, um Namensdopplungen auszuschließen-->
 				<li><div id="btnDiv">
-					<button onclick="createGame()">Create new game</button>
-					<button onclick="joinGame()">Join existing game</button>
+          <button id="btnCreate" onclick="createGame()" disabled>Create new game</button><!--checkNickname();-->
 				</div></li>
 				</ul>
 			</div>

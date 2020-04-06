@@ -10,7 +10,7 @@ main{
 	flex-flow: column nowrap;
 	justify-content: center;
 	align-items: center;
-	margin: 10%;
+	margin: 5%;
 }
 #welcome{
 	text-align: center;
@@ -28,6 +28,18 @@ main{
 	padding: 0.5em;
 }
 
+.valid{
+	border: 1px solid var(--right);
+}
+.invalid{
+	border-color: 1px solid var(--wrong);
+}
+
+#validate{
+	width: auto;
+	padding: 5px;
+}
+
 #btnDiv{
 	display: flex;
 	flex-flow: row wrap;
@@ -37,6 +49,10 @@ button{
 	margin: 10px;
 	width: 160px;
 	padding: 0.5em;
+}
+
+#btnDiv{
+	z-index: 10;
 }
 
 @media (device-width < 450px){
