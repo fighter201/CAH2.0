@@ -4,7 +4,7 @@ Optik:
     - Startseite: buttons für create/join Game ✓
     
     In Arbeit:
-    - create Game: Liste Auswahlmöglichkeiten: WC(schlage Liste mit Packeten(Häckchen setzen) vor), maxSpieler(3-10 vorschlag), maxPunkte(50), Spielname(String Eingabe), Spielpasswort(String Eingabe)
+    - create Game: Liste Auswahlmöglichkeiten: WC(schlage Liste mit Packeten(Häckchen setzen) vor), maxSpieler(3-10 vorschlag), maxPunkte(50), Spielname(String Eingabe), Spielpasswort(String Eingabe) -> optional Zeitbegrenzung für die Runden
     
     Ausstehend:
     - joinGame: Liste mit "Lobbynamen" und "Anzahl Spieler/max. Spieler
