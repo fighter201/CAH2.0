@@ -7,6 +7,7 @@
 		
 		<link rel="stylesheet" href="../css/cah2.css">
 		<link rel="stylesheet" href="../css/createGame.css">
+		<link rel="stylesheet" href="../css/checkbox.css">
 		
 		<script defer src="../js/createGame_functionality.js"></script>
 		
@@ -47,22 +48,43 @@
 			}
 		</script>
 	</head>
-
-
-
+	
 	<body>
 		<header>
 			<h1>Cards Against Humanity</h1>
 		</header>
 		<main>
-			<p>
-				create Game !!!!!!
-				Settings list
-			</p>
-			<label for="gameID">GameID: </label>
-			<input type="text", id='gameID'>
-			
-			<button onclick="createLobby()">create Game</button>
+			<div id='content'>
+				<ul>
+					<li><label for="gameName">Choose a name for the game:</label>
+						<input id='gameName' name="gameName" type="text"></li>
+					<li><label for="maxPlayer">Maximum player number:</label>
+						<select id='maxPlayer' name="maxPlayer">
+							<option selected>3</option>
+							<option>4</option>
+							<option>5</option>
+							<option>6</option>
+							<option>7</option>
+							<option>8</option>
+							<option>9</option>
+							<option>10</option>
+						</select></li>
+					<li><label for="maxPoints">Round ends at</label>
+						<input id='maxPoints' name="maxPoints" type="text">
+						<label for="maxPoints">points</label></li>
+					<li><span>Choose your card sets</span>
+						<ul>
+							<li><input id='set1' name="set1" type="checkBox">
+								<label for="set1">First set</label></li>
+							<li><input id='set2' name="set2" type="checkBox">
+								<label for="set2">Second set</label></li>
+							<!--Card sets werden über javaScript geladen-->
+						</ul></li>
+					<li><label for="password">Set a password</label>
+						<input id='password' name="password" type="text"></li>
+				</ul>
+				<button id="apply" onclick="createLobby()">Create game</button>
+			</div>
 		</main>
 		<footer>
 			<ul>
