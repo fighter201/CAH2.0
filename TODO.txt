@@ -18,3 +18,9 @@ Optik:
         - Wartebildschirm für Slaves: BC alle gelegten WC
         - Gewinnerdisplay:
         - Endbildschirm: Scoreboard
+        
+    Für den Schluss/ wenn noch Zeit übrig ist:
+    - dark Mode -> über Dropdownmenu in header einstellbar
+
+Engine:
+
