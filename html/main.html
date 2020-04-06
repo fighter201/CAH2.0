@@ -29,7 +29,8 @@
 					<input name="nickname" id="nickname" type="text" oninvalid="checkNickname()" required>
 					<button id="validate" hidden>Check</button> <!--evtl später, um Namensdopplungen auszuschließen-->
 				<li><div id="btnDiv">
-          <button id="btnCreate" onclick="createGame()" disabled>Create new game</button><!--checkNickname();-->
+          				<button id="btnCreate" onclick="createGame()" disabled>Create new game</button><!--checkNickname();-->
+					<button id="btnJoin" onclick="window.location.href='createGame.html'" disabled>Join existing game</button><!--checkNickname();-->
 				</div></li>
 				</ul>
 			</div>
