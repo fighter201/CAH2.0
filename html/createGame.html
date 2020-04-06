@@ -1,56 +1,75 @@
+<!DOCTYPE html>
 <html>
-<head>
-    <h1>Tittle 1</h1>
-</head>
+	<head>
+		<title>Create game | Cards Against Humanity</title>
+		<link rel="icon" href="img/icon.png" type="images/x-icon">
+		<meta charset="utf-8">
+		
+		<link rel="stylesheet" href="../css/cah2.css">
+		<link rel="stylesheet" href="../css/createGame.css">
+		
+		<script defer src="../js/createGame_functionality.js"></script>
+		
+		<script src="/socket.io/socket.io.js"></script>
 
-<script src="/socket.io/socket.io.js"></script>
-
-<script>
-    var socket=io('/DB');
-    const lobbyUrl = "/waitingGamestart.html";
-
-</script>
-<script>
-    function createLobby() {
-        console.log('input content: ' + document.getElementById('gameID').value);
+		<script>
+			var socket=io('/DB');
+			const lobbyUrl = "/waitingGamestart.html";
+		</script>
+		<script>
+			function createLobby() {
+				console.log('input content: ' + document.getElementById('gameID').value);
         
-        if (document.getElementById('gameID').value=='' || document.getElementById('gameID').value.includes(' ')) {
-            console.log('no valid gameID');
-            return;
-        }
-        // var settings = extractSettings();
+				if (document.getElementById('gameID').value=='' || document.getElementById('gameID').value.includes(' ')) {
+					console.log('no valid gameID');
+					return;
+				}
+				// var settings = extractSettings();
 
-        var gameID = document.getElementById('gameID').value;
-        var userID = 'default user';
-        var settings = [3, '5min'];
-        socket.emit('createGame', userID, gameID, settings);
-        socket.on('duplicatedGameID', function(duplicate) {
-            if (!duplicate){
-                window.sessionStorage.setItem('gameID', gameID);
-                window.sessionStorage.setItem('master', true);
-                window.location.href = lobbyUrl;
-            } else {
-                alert('duplicated gameID');
-            }
-        });
-    }
+				var gameID = document.getElementById('gameID').value;
+				var userID = 'default user';
+				var settings = [3, '5min'];
+				socket.emit('createGame', userID, gameID, settings);
+				socket.on('duplicatedGameID', function(duplicate) {
+					if (!duplicate){
+						window.sessionStorage.setItem('gameID', gameID);
+						window.sessionStorage.setItem('master', true);
+						window.location.href = lobbyUrl;
+					} else {
+						alert('duplicated gameID');
+					}
+				});
+			}
 
-    function extractSettings() {
-        //TODO
-        return array();
-    }
+			function extractSettings() {
+				//TODO
+				return array();
+			}
+		</script>
+	</head>
 
-</script>
 
-<body>
-    <p>
-        create Game !!!!!!
-        Settings list
-    </p>
-    <label for="gameID">GameID: </label>
-    <input type="text", id='gameID'>
-    
-    <button onclick="createLobby()">create Game</button>
-</body>
 
+	<body>
+		<header>
+			<h1>Cards Against Humanity</h1>
+		</header>
+		<main>
+			<p>
+				create Game !!!!!!
+				Settings list
+			</p>
+			<label for="gameID">GameID: </label>
+			<input type="text", id='gameID'>
+			
+			<button onclick="createLobby()">create Game</button>
+		</main>
+		<footer>
+			<ul>
+			    <li><a href="http://www.lysin-games.com/agb">Allgemeine Gesch&auml;ftsbedingungen</a></li>
+			    <li><a href="http://www.lysin-games.com/datenschutz">Datenschutzerkl&auml;rung</a></li>
+				<li><a href="http://www.lysin-games.com/impressum">Impressum</a></li>
+			</ul>
+		</footer>
+	</body>
 </html>
