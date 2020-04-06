@@ -24,7 +24,7 @@ var LOBBYNSP = io.of('/lobby');
 //answer http request
 function handler (req, res) {
     var url = req.url;
-    // console.log(url);
+    console.log(url);
 
     if (req.url == '/'){
         url = initialFile;
