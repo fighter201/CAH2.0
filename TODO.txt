@@ -1,6 +1,7 @@
 Optik:
-    - erste Seite: nickname input;
-    - Startseite: buttons für create/join Game
+    - erste Seite: nickname input; ✓
+    - Startseite: buttons für create/join Game ✓
+    
     - joinGame: Liste mit "Lobbynamen" und "Anzahl Spieler/max. Spieler
     - create Game: Liste Auswahlmöglichkeiten: WC(schlage Liste mit Packeten(Häckchen setzen) vor), maxSpieler(3-20 vorschlag), maxPunkte(50), Spielname(String Eingabe), Spielpasswort(String Eingabe)
     - Lobby warte-Seite: Liste mit Teilnehmer, startbutton, eventuell: chat, settings(siehe createGame)
