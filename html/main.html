@@ -20,8 +20,8 @@
 					<label for="nickname">Choose your nickname:</label>
 					<input name="nickname" id="nickname" type="text">
 				<li><div id="btnDiv">
-					<button onclick="createGame()">Create new game</button>
-					<button onclick="joinGame()">Join existing game</button>
+          			<button id="btnCreate" onclick="window.location.href='joinGame.html'" disabled>Create new game</button><!--checkNickname();-->
+					<button id="btnJoin" onclick="window.location.href='createGame.html'" disabled>Join existing game</button><!--checkNickname();-->
 				</div></li>
 				</ul>
 			</div>

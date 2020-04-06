@@ -29,7 +29,7 @@ function handler (req, res) {
     if (req.url == '/'){
         url = initialFile;
     } else if (url.endsWith('.html')) {
-        url = '/html/' + url;
+        url = '/html' + url;
     }
 
     fs.readFile(__dirname + url, function (err, data) {
