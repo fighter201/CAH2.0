@@ -4,10 +4,11 @@ Optik:
     - Startseite: buttons für create/join Game ✓
     
     In Arbeit:
-    - create Game: Liste Auswahlmöglichkeiten: WC(schlage Liste mit Packeten(Häckchen setzen) vor), maxSpieler(3-10 vorschlag), maxPunkte(50), Spielname(String Eingabe), Spielpasswort(String Eingabe) -> optional Zeitbegrenzung für die Runden
+    - create Game: Liste Auswahlmöglichkeiten: WC(schlage Liste mit Packeten(Häckchen setzen) vor), maxSpieler(3-10 vorschlag), maxPunkte(50), Spielname(String Eingabe), Spielpasswort(String Eingabe)
         Edit: Anzahl der Handkarten(WC)
 
     Ausstehend:
+    - createGame (Ergänzungen): optional Zeitbegrenzung für die Runden, input[number] stylen
     - joinGame: Liste mit "Lobbynamen" und "Anzahl Spieler/max. Spieler
     - Lobby warte-Seite: Liste mit Teilnehmer, startbutton, eventuell: chat, settings(siehe createGame)
     - Spielseite:
