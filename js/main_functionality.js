@@ -1,17 +1,11 @@
-console.log("script loaded via defer");
 const content = document.getElementById('content');
 const inputNickname = document.getElementById('nickname');
 const btnCreate = document.getElementById('btnCreate');
 const btnJoin = document.getElementById('btnJoin');
-const btnCheck = document.getElementById('validate');
 const maxNickname = 32;
 let nickname;
 
 //useful functions ================================================
-String.prototype.isEmpty = function(){
-	console.log("length"+this.length);
-	return (this.length === 0 || !this.trim());
-};
 function empty(string){
 	console.log("empty()");
 	return (string.length === 0 || !string.trim());
@@ -31,8 +25,9 @@ function removeClass(element, theClass){
 
 function checkNickname(){
 	console.log("nickname:"+inputNickname.value);
+	nickname = inputNickname.value;
 	
-	if(empty(inputNickname.value) || inputNickname.value.length > maxNickname){
+	if(empty(nickname) || nickname.length > maxNickname){
 		btnCreate.disabled = true;
 		btnJoin.disabled = true;
 		console.log("disabled");
@@ -44,15 +39,9 @@ function checkNickname(){
 	}
 }
 
-inputNickname.addEventListener('keyup', function(){
-	checkNickname();
-});
-/*
-btnCheck.addEventListener('click', function(){ //evtl. nutzen, um gleiche Nicknames zu verbieten
-	checkNickname();
-	if(btnCreate.enabled) switchClass(inputNickname, 'valid', 'invalid');
-	else{ switchClass(inputNickname, 'invalid', 'valid'); }
-});*/
+inputNickname.addEventListener('keyup', checkNickname);
+btnCreate.addEventListener('click', createGame);
+btnJoin.addEventListener('click', joinGame);
 
 //nickname to sessionvariable
 function saveNickname(){
