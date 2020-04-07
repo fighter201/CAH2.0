@@ -62,13 +62,13 @@ function saveNickname(){
 //button onclick
 function createGame() {
 	saveNickname();
-	window.location.href='/createGame.html';
+	window.location.href='createGame.html';
 }
 
 //button onclick
 function joinGame() {
 	saveNickname();
-	window.location.href='/joinGame.html';
+	window.location.href='joinGame.html';
 }
 
 window.onload = function(){
