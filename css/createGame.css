@@ -26,10 +26,41 @@ input{
 }
 
 #maxPoints{
-  width: 30px;
   margin: 0px 5px;
+}
+
+#btnerr{
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 #apply{
   width: 150px;
+  margin: 0px 5px;
+}
+
+@media (device-width < 450px){
+  #content{
+    width: 90%;
+  }
+  #content>ul{
+    width: 97%;
+  }
+  label,span,button, select{
+    font-size: 2em;
+  }
+  input[type="text"]{
+    margin: 10px;
+  }
+  #maxPoints{
+    width: 60px;
+    margin: 0px 10px;
+  }
+  #apply{
+    width: 250px;
+    padding: 10px;
+  }
 }

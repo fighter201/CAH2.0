@@ -10,42 +10,10 @@
 		<link rel="stylesheet" href="../css/checkbox.css">
 		
 		<script defer src="../js/createGame_functionality.js"></script>
-		
 		<script src="/socket.io/socket.io.js"></script>
-
 		<script>
 			var socket=io('/DB');
-			const lobbyUrl = "/waitingGamestart.html";
-		</script>
-		<script>
-			function createLobby() {
-				console.log('input content: ' + document.getElementById('gameID').value);
-        
-				if (document.getElementById('gameID').value=='' || document.getElementById('gameID').value.includes(' ')) {
-					console.log('no valid gameID');
-					return;
-				}
-				// var settings = extractSettings();
-
-				var gameID = document.getElementById('gameID').value;
-				var userID = 'default user';
-				var settings = [3, '5min'];
-				socket.emit('createGame', userID, gameID, settings);
-				socket.on('duplicatedGameID', function(duplicate) {
-					if (!duplicate){
-						window.sessionStorage.setItem('gameID', gameID);
-						window.sessionStorage.setItem('master', true);
-						window.location.href = lobbyUrl;
-					} else {
-						alert('duplicated gameID');
-					}
-				});
-			}
-
-			function extractSettings() {
-				//TODO
-				return array();
-			}
+			const lobbyUrl = "waitingGamestart.html";
 		</script>
 	</head>
 	
@@ -59,31 +27,27 @@
 					<li><label for="gameName">Choose a name for the game:</label>
 						<input id='gameName' name="gameName" type="text"></li>
 					<li><label for="maxPlayer">Maximum player number:</label>
-						<select id='maxPlayer' name="maxPlayer">
-							<option selected>3</option>
-							<option>4</option>
-							<option>5</option>
-							<option>6</option>
-							<option>7</option>
-							<option>8</option>
-							<option>9</option>
-							<option>10</option>
-						</select></li>
+						<input id='maxPlayer' name="maxPlayer" type="number" min="3" max="10" value="3">
+						</input></li>
 					<li><label for="maxPoints">Round ends at</label>
-						<input id='maxPoints' name="maxPoints" type="text">
+						<input id='maxPoints' name="maxPoints" type="number" min="1" value="10">
 						<label for="maxPoints">points</label></li>
 					<li><span>Choose your card sets</span>
-						<ul>
-							<li><input id='set1' name="set1" type="checkBox">
+						<ul id='setList'>
+							<li><input id='set1' name="set1" type="checkBox" checked>
 								<label for="set1">First set</label></li>
-							<li><input id='set2' name="set2" type="checkBox">
+							<li><input id='set2' name="set2" type="checkBox" checked>
 								<label for="set2">Second set</label></li>
 							<!--Card sets werden über javaScript geladen-->
 						</ul></li>
 					<li><label for="password">Set a password</label>
 						<input id='password' name="password" type="text"></li>
 				</ul>
-				<button id="apply" onclick="createLobby()">Create game</button>
+				<div id='btnerr'>
+					<span class="hide error" id="gameNameError">Game name is invalid.</span> 
+					<span class="hide error" id="numbError">Numbers are outside the expected range.</span>
+					<button id="apply"  disabled>Create game</button>
+				</div>
 			</div>
 		</main>
 		<footer>

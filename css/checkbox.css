@@ -22,3 +22,20 @@ input[type="checkbox"]:checked + label::before{
 	box-shadow: inset 0px 0px 0px 3px var(--background);
 	background-color: var(--secondary);
 }
+
+@media (device-width < 450px){
+	input[type="checkbox"] + label::before{
+	  border: 2px solid var(--basicText);
+		width: 28px;
+		height: 28px;
+		margin-right: 10px;
+	}
+	input[type="checkbox"]:hover+label::before{
+   border: 2px solid var(--secondary);
+	 box-shadow: 0px 0px 3px var(--secondary);
+  }
+  input[type="checkbox"]:checked + label::before{
+	 border: 2px solid var(--secondary);
+	 box-shadow: inset 0px 0px 0px 4px var(--background);
+  }
+}

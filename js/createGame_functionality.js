@@ -1,0 +1,99 @@
+console.log("loaded createGame_functionality.js");
+const inputGameName = document.getElementById('gameName');
+const inputMaxPlayer = document.getElementById('maxPlayer');
+const inputMaxPoints = document.getElementById('maxPoints');
+const inputPassword = document.getElementById('password');
+const ulSetList = document.getElementById('setList');
+const gameNameError = document.getElementById('gameNameError');
+const numbError = document.getElementById('numbError');
+const btnApply = document.getElementById('apply');
+
+var gameName;
+var writables ={
+	name: inputGameName,
+	players: inputMaxPlayer,
+	points: inputMaxPoints,
+	password: inputPassword
+};
+
+//useful functions ================================================
+String.prototype.isEmpty = function(){
+	return (this.length === 0 || !this.trim());
+};
+function addClass(element, theClass){
+	if(!element.classList.contains(theClass)) element.classList.add(theClass);
+}
+function switchClass(element, adding, removing){
+	if(element.classList.contains(removing)) element.classList.remove(removing);
+	if(element.classList.contains(adding)) element.classList.remove(adding);
+	addClass(element, adding);
+}
+function removeClass(element, theClass){
+	if(element.classList.contains(theClass)) element.classList.remove(theClass);
+}
+//=================================================================
+
+function checkEntries(){
+	var allCorrect = true;
+	for (x in writables){
+		if(writables[x].value.isEmpty()){
+			allCorrect = false;
+			console.log(x+" is empty");
+		}
+	}
+	if(allCorrect) btnApply.disabled = false;
+	else{ btnApply.disabled = true;}
+}
+
+
+function createLobby() {
+	gameName = inputGameName.value;
+	console.log('input content: ' + gameName);
+       
+	//test for whitespaces
+	if (gameName.includes(' ')) {
+		console.log('no valid gameID');
+		switchClass(gameNameError, 'show', 'hide');
+		/*addClass(inputGameName, 'inputError');*/
+		return;
+	}
+	else{ switchClass(gameNameError, 'hide', 'show');}
+	
+	//test for invalid characters in number inputs
+	if(inputMaxPlayer.value<3||inputMaxPoints.value<1){
+		switchClass(numbError, 'show', 'hide');
+		return;
+	}
+	else{ switchClass(numbError, 'hide', 'show');}
+	}
+	// var settings = extractSettings();
+
+
+/*
+	var gameID = gameName;
+	var userID = 'default user';
+	var settings = [3, '5min'];
+	socket.emit('createGame', userID, gameID, settings);
+	socket.on('duplicatedGameID', function(duplicate) {
+		if (!duplicate){
+			window.sessionStorage.setItem('gameID', gameID);
+			window.sessionStorage.setItem('master', true);
+			window.location.href = lobbyUrl;
+		} else {
+			alert('duplicated gameID');
+		}
+	});*/
+}
+
+function extractSettings() {
+	//TODO
+	return array();
+}
+
+
+btnApply.addEventListener('click', createLobby);
+
+window.onload = function(){
+	checkEntries();
+	for(x in writables) writables[x].addEventListener('keyup', checkEntries);
+};

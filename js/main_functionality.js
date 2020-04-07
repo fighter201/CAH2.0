@@ -63,4 +63,5 @@ function joinGame() {
 window.onload = function(){
 	console.log("window onload event");
 	inputNickname.setAttribute("maxlength", maxNickname);
+	inputNickname.focus();
 };
