@@ -2,9 +2,10 @@ Optik:
     Erledigt:
     - erste Seite: nickname input; ✓
     - Startseite: buttons für create/join Game ✓
+    - createGame: maxSpieler(3-10 vorschlag), maxPunkte(50), Spielname(String Eingabe), Spielpasswort(String Eingabe)
     
     In Arbeit:
-    - create Game: Liste Auswahlmöglichkeiten: WC(schlage Liste mit Packeten(Häckchen setzen) vor), maxSpieler(3-10 vorschlag), maxPunkte(50), Spielname(String Eingabe), Spielpasswort(String Eingabe)
+    - create Game:  WC(schlage Liste mit Packeten(Häckchen setzen) vor), 
         Edit: Anzahl der Handkarten(WC)
 
     Ausstehend:
@@ -25,4 +26,4 @@ Optik:
     - dark Mode -> über Dropdownmenu in header einstellbar
 
 Engine:
-
+    - createGame: SyntaxError (line 85) beim Laden von js -> im Moment auskommentiert
