@@ -7,6 +7,8 @@ const ulSetList = document.getElementById('setList');
 const gameNameError = document.getElementById('gameNameError');
 const numbError = document.getElementById('numbError');
 const btnApply = document.getElementById('apply');
+const main = document.getElementById('main');
+var mainMinSize = 400; //für keine card sets aufgelistet, pro set +20
 
 var gameName;
 var writables ={
@@ -31,7 +33,47 @@ function switchClass(element, adding, removing){
 function removeClass(element, theClass){
 	if(element.classList.contains(theClass)) element.classList.remove(theClass);
 }
+function htmlElement(type, id, innerHTML){
+	var theElement = document.createElement(type);
+	if(typeof id !== "undefined") theElement.id = id;
+	if(typeof innerHTML !== "undefined") theElement.innerHTML = innerHTML;
+	return theElement;
+}
 //=================================================================
+
+function updateMainMinSize(){
+	main.style.minHeight = mainMinSize+"px";
+}
+
+var availableCardSets = [];
+function CardSet(setName){
+	this.setName = setName;
+	this.id = setName.replace(/\s/g, "_");
+	
+	console.log("id:"+this.id);
+	console.log("setName:"+this.setName);
+	
+	//create html elements for list entry
+	var li = htmlElement('li');
+	var checkBox = htmlElement('input', this.id);
+	checkBox.setAttribute("type", "checkBox");
+	checkBox.setAttribute("name", this.id);
+	var label = htmlElement('label',"label_"+this.id, setName);
+	label.setAttribute("for", this.id);
+	
+	li.appendChild(checkBox);
+	li.appendChild(label);
+	
+	this.html = li;
+}
+//alle Card Sets hierüber einfügen!
+function addCardSet(setName){
+	var newSet = new CardSet(setName);
+	availableCardSets.push(newSet);
+	ulSetList.appendChild(newSet.html);
+	mainMinSize += 29;
+	updateMainMinSize();
+}
 
 function checkEntries(){
 	var allCorrect = true;
@@ -65,7 +107,6 @@ function createLobby() {
 		return;
 	}
 	else{ switchClass(numbError, 'hide', 'show');}
-	}
 	// var settings = extractSettings();
 
 
@@ -96,4 +137,5 @@ btnApply.addEventListener('click', createLobby);
 window.onload = function(){
 	checkEntries();
 	for(x in writables) writables[x].addEventListener('keyup', checkEntries);
+	addCardSet("automatically added	1");
 };

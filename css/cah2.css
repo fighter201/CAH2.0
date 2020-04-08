@@ -107,6 +107,7 @@ button:disabled{
 	color: var(--wrong);
 	margin: 0px 5px;
 	font-size: 0.8em;
+	background-color: transparent;
 }
 
 .hide{

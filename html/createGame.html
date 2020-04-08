@@ -21,25 +21,22 @@
 		<header>
 			<h1>Cards Against Humanity</h1>
 		</header>
-		<main>
+		<main id="main">
 			<div id='content'>
 				<ul>
 					<li><label for="gameName">Choose a name for the game:</label>
 						<input id='gameName' name="gameName" type="text"></li>
 					<li><label for="maxPlayer">Maximum player number:</label>
-						<input id='maxPlayer' name="maxPlayer" type="number" min="3" max="10" value="3">
-						</input></li>
+						<input id='maxPlayer' name="maxPlayer" type="number" min="3" max="10" value="3"></li>
 					<li><label for="maxPoints">Round ends at</label>
 						<input id='maxPoints' name="maxPoints" type="number" min="1" value="10">
 						<label for="maxPoints">points</label></li>
 					<li><span>Choose your card sets</span>
 						<ul id='setList'>
-							<li><input id='set1' name="set1" type="checkBox" checked>
-								<label for="set1">First set</label></li>
-							<li><input id='set2' name="set2" type="checkBox" checked>
-								<label for="set2">Second set</label></li>
-							<!--Card sets werden über javaScript geladen-->
+							<!--Card sets werden über js hier rein geladen-->
 						</ul></li>
+					<li><label for="numbCards">White cards per player:</label>
+						<input id='numbCards' name="numbCards" type="number" min="1" value="10"></li>
 					<li><label for="password">Set a password</label>
 						<input id='password' name="password" type="text"></li>
 				</ul>

@@ -4,6 +4,7 @@ main{
   align-items: center;
   min-height: 400px;
   font-size: 1.1em;
+  background-color: transparent;
 }
 
 #content{
@@ -11,11 +12,13 @@ main{
   flex-flow: column nowrap;
   align-items: flex-end;
   justify-content: center;
+  background-color: transparent;
 }
 #content > ul{
   border: 1px solid var(--borderColor);
   border-radius: 4px;
   padding: 15px;
+  background-color: var(--background);
 }
 
 #content > ul >li{
@@ -35,6 +38,7 @@ input{
   flex-flow: row wrap;
   justify-content: flex-end;
   align-items: center;
+  background-color: transparent;
 }
 
 #apply{
