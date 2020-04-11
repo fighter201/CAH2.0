@@ -107,6 +107,7 @@ function createLobby() {
 		return;
 	}
 	else{ switchClass(numbError, 'hide', 'show');}
+}
 	// var settings = extractSettings();
 
 
@@ -124,13 +125,17 @@ function createLobby() {
 			alert('duplicated gameID');
 		}
 	});*/
-}
+
 
 function extractSettings() {
-	//TODO
-	return array();
+	return {
+		name : inputGameName.value,
+		maxPlayer : inputMaxPlayer.value,
+		maxPoints : inputMaxPoints.value,
+		//packages : {packagename:boolean} TODO
+		password : inputPassword.value
+	};
 }
-
 
 btnApply.addEventListener('click', createLobby);
 

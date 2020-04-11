@@ -9,11 +9,12 @@ class Player {
     #score = 0;
     #hand = [];
     #czar = false;
+    #connected = true;
 
-    constructor(socketID, nickname) {
-        // this.#userID = userID;
+    constructor(id, socketID, nickname) {
+        this.#id = id;
         this.#socketID = socketID;
-        this.nickname = nickname;
+        this.#nickname = nickname;
     }
 
     addWC(WC){
@@ -26,6 +27,21 @@ class Player {
 
     get score(){
         return this.#score;
+    }
+
+    get connected(){
+        return this.#connected;
+    }
+    
+    set connected(connected){
+        if (connected==true || connected== false) {
+            this.#connected = connected;
+        }
+        // wrong type of connected;
+    }
+
+    set socketID(socketID) {
+        this.#socketID = socketID;
     }
 
     won(){

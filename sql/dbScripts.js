@@ -1,5 +1,5 @@
 
-dbConnection = require('./dbConnection.js')();
+dbConnection = require('./dbConnection.js');
 // console.log(db);
 // dbConnection = db();
 

@@ -1,8 +1,9 @@
-const Player = require('./js/Player.js')
+const Player = require('./Player.js')
 
 class Game {
 
     #id='';
+    #name='';
     #password='';
     #gamestate=''; //ACHTUNG: soll nur "Lobby", "Running", "End" annehmen
     #numPlayer=0;
@@ -10,6 +11,7 @@ class Game {
     #WC=[];
     #BC=[];
     #currentBC='';
+    #currentWC=''; //{socketID, [WC]}
     #master=''; //socketID
     // #settings={}; //{numHand:int, maxPoint:int }
     #numHand=5;
@@ -18,15 +20,17 @@ class Game {
     #czar={}; // Playerobj
     #players=[]; //Playerobjekte
 
-    constructor(id, password, maxPlayer, master, packages) {
+    constructor(id, name, password, maxPlayer, numHand, packages) {
         if (maxPlayer < 3) {
             return false;
         }
 
         this.#id = id;
+        this.#name = name;
         this.#password = password;
         this.#maxPlayer = maxPlayer;
-        this.#master = master;
+        this.#numHand = numHand;
+        // this.#master = master;
 
         //load WC BC from packages
         this.#WC=this.loadWC(packages);
@@ -107,7 +111,7 @@ class Game {
 
     fillHands() {
         this.#players.forEach(player => {
-            while (player.numHand() <= this.#settings.numHand){
+            while (player.numHand() <= this.numHand){
                 var ranNum = Math.floor(Math.random()*this.#WC.length);
                 player.addWC(this.#WC[ranNum]);
                 this.#WC.splice(ranNum, 1);
@@ -144,6 +148,10 @@ class Game {
             }
         }
         return null;
+    }
+
+    getPlayers(){
+        return this.#players;
     }
 
     get id(){

@@ -1,8 +1,5 @@
 var mysql = require('mysql');
 
-
-
-
 function getConnection() {
   var connection = mysql.createConnection({
     host: "localhost",
@@ -13,8 +10,8 @@ function getConnection() {
   
   connection.connect(function(err) {
     if (err){
-      console.log('error at connecting to database');
-      console.log('ERROR: ' + err.message);
+      console.log('error at connecting to database:');
+      console.log('    ERROR: ' + err.message);
     } else {
       console.log('Connected');
     }
