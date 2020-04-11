@@ -25,6 +25,7 @@ Optik:
     Für den Schluss/ wenn noch Zeit übrig ist:
     - dark Mode -> über Dropdownmenu in header einstellbar
     - Nickname im Header anzeigen
+    - Möglichkeit, Lobby offen oder geschlossen (mit Whitelist) zu erstellen
 
 Engine:
     - createGame:
