@@ -28,7 +28,10 @@ Optik:
     - Nickname im Header anzeigen
 
 Engine:
-    - createGame: 
-        - SyntaxError (line 85) beim Laden von js -> im Moment auskommentiert
+    - createGame:
         - alles was sonst noch nötig ist -> Einstellungen abspeichern, hinterlegte CardSets einfüttern, ...
     
+Laden von den Packages:
+    Der Datenbankzugriff auf der client Seite muss mit php gemacht werden nicht js(problem ist auf der client Seite gibt es kein "require" was man für die db verbindung braucht).
+    Darstellen dann in dem Stil: echo "<li> package1 </li>
+    Falls das nicht so leicht funktioniert kann man auch socket.io missbrauchen um auf der client Seite dann leicht js zum laden zu benutzen
