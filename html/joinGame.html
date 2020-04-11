@@ -1,62 +1,67 @@
 <html>
-<head>
+	<head>
+		<title>Join game | Cards Against Humanity</title>
+		<link rel="icon" href="img/icon.png" type="images/x-icon">
+		<meta charset="utf-8">
+		
+		<link rel="stylesheet" href="../css/cah2.css">
+		<link rel="stylesheet" href="../css/joinGame.css">
+		
+		<script defer src="../js/joinGame_functionality.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+	</head>
 
-</head>
+	
 
-<script src="/socket.io/socket.io.js"></script>
+	<body>
+		<header>
+			<h1>Cards Against Humanity</h1>
+		</header>
+		<main id="main">
+			<div id="content">
+				<ul id="gameList">
+					<li class="lobbyElement" id="testLobby1">
+						<div class="subContainer1">
+							<h3>InterestingGameName</h3>
+							<span class="dispPlayer"> 
+								<span id="insideLobbyTest1">3</span> / <span id="maxLobbyTest1">5</span> 
+							</span>
+						</div>
+						<div class="subContainer2">
+							<span class="creatorLobby">created by <span id="creatorLobbyTest1">nobody</span> </span>
+						</div>
+					</li>
+					<li class="lobbyElement" id="testLobby2">
+						<div class="subContainer1">
+							<h3>LameGameName</h3>
+							<span class="dispPlayer"> 
+								<span id="insideLobbyTest2">3</span> / <span id="maxLobbyTest2">5</span> 
+							</span>
+						</div>
+						<div class="subContainer2">
+							<span class="creatorLobby">created by <span id="creatorLobbyTest2">nobody</span> </span>
+						</div>
+					</li>
+					<!-- automatisch hinzugefügte Listeneinträge -->
+				</ul>
+				
+				<div id="btnBar">
+					<button id="create Game"
+				</div>
+			
+			</div>
+		</main>
+		<footer>
+			<ul>
+			    <li><a href="http://www.lysin-games.com/agb">Allgemeine Gesch&auml;ftsbedingungen</a></li>
+			    <li><a href="http://www.lysin-games.com/datenschutz">Datenschutzerkl&auml;rung</a></li>
+				<li><a href="http://www.lysin-games.com/impressum">Impressum</a></li>
+			</ul>
+		</footer>
+	
 
-<body>
-    Liste an Lobbys
+    <!-- sämtliche scripts sind vorerst mal nach joinGame_functionality.js abgeschoben -->
 
-    <script>
-        socket = io('/DB');
-        socket.emit('getGames');
-        socket.on('res', function(data) {
-            var liste = document.getElementById('gameList');
-            var initialContent = liste.innerHTML;
-            
-            if (initialContent === undefined){
-                initialContent = "";
-            }
-
-            // console.log(data.length);
-            
-            var newContent = '';
-            var oldContent = initialContent;
-            // // liste.innerHTML='<li>ein weiterer test</li>';
-            data.forEach(element => {
-                var gameID = element.gameID;
-                newContent = oldContent + "<li><button id='" + gameID + "', onclick=\"join('" + gameID + "')\">" + gameID +"</button></li>";
-                oldContent = newContent;
-            });
-
-            liste.innerHTML = newContent;
-            // socket.disconnect();
-            // return false;
-        })
-    </script>
-
-    <script>
-        function join(gameID){
-            // console.log('button pressed: ' + gameID);
-            socket.emit('joinGame', gameID);
-            socket.on('canJoinGame', function(canJoin) {
-                if (canJoin){
-                    console.log('button clicked: ' + gameID);
-                    window.sessionStorage.setItem('gameID', gameID);
-                    window.sessionStorage.setItem('master', false);
-                    console.log(window.sessionStorage.getItem('gameID'));
-                    window.location.href='waitingGamestart.html';
-                } else {
-                    window.alert('cant join Lobby full');
-                }
-            });
-            
-            
-        }
-    </script>
-
-    <ul id='gameList'></ul>
 </body>
 
 </html>
