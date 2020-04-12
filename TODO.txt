@@ -26,6 +26,14 @@ Optik:
     - dark Mode -> über Dropdownmenu in header einstellbar
     - Nickname im Header anzeigen
     - Möglichkeit, Lobby offen oder geschlossen (mit Whitelist) zu erstellen
+    - burnrunde
+    - blank cards
+    - packages erstellen(custom WC,BC)
+
+    Für denn Schluss vom Schluss:
+    - rang system
+    - admin center
+    - statistiken
 
 Engine:
     - createGame:
