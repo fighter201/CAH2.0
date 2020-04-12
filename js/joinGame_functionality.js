@@ -1,49 +1,66 @@
+const btnJoinGame = document.getElementById('joinGame');
+const btnCreateGame = document.getElementById('createGame');
+var lobbys = document.getElementsByClassName('lobbyElement');
+var chosenLobby;
 
 
 
 
 
+btnJoinGame.addEventListener('click', function(){
+	join(gameName);
+});
+btnCreateGame.addEventListener('click', function(){
+	window.location.href='createGame.html';
+});
 
 socket = io('/DB');
-        socket.emit('getGames');
-        socket.on('res', function(data) {
-            var liste = document.getElementById('gameList');
-            var initialContent = liste.innerHTML;
-            
-            if (initialContent === undefined){
-                initialContent = "";
-            }
+socket.emit('getGames');
+socket.on('res', function(data) {
+    var liste = document.getElementById('gameList');
+    var initialContent = liste.innerHTML;
+    
+    if (initialContent === undefined){
+        initialContent = "";
+    }
 
-            // console.log(data.length);
-            
-            var newContent = '';
-            var oldContent = initialContent;
-            // // liste.innerHTML='<li>ein weiterer test</li>';
-            data.forEach(element => {
-                var gameID = element.gameID;
-                newContent = oldContent + "<li><button id='" + gameID + "', onclick=\"join('" + gameID + "')\">" + gameID +"</button></li>";
-                oldContent = newContent;
-            });
+    // console.log(data.length);
+    
+    var newContent = '';
+    var oldContent = initialContent;
+    // // liste.innerHTML='<li>ein weiterer test</li>';
+    data.forEach(element => {
+        var gameID = element.gameID;
+        newContent = oldContent + "<li><button id='" + gameID + "', onclick=\"join('" + gameID + "')\">" + gameID +"</button></li>";
+        oldContent = newContent;
+    });
 
-            liste.innerHTML = newContent;
-            // socket.disconnect();
-            // return false;
-        })
+    liste.innerHTML = newContent;
+    // socket.disconnect();
+    // return false;
+})
 		
-		function join(gameID){
-            // console.log('button pressed: ' + gameID);
-            socket.emit('joinGame', gameID);
-            socket.on('canJoinGame', function(canJoin) {
-                if (canJoin){
-                    console.log('button clicked: ' + gameID);
-                    window.sessionStorage.setItem('gameID', gameID);
-                    window.sessionStorage.setItem('master', false);
-                    console.log(window.sessionStorage.getItem('gameID'));
-                    window.location.href='waitingGamestart.html';
-                } else {
-                    window.alert('cant join Lobby full');
-                }
-            });
-            
-            
+function join(gameID){
+    // console.log('button pressed: ' + gameID);
+    socket.emit('joinGame', gameID);
+    socket.on('canJoinGame', function(canJoin) {
+        if (canJoin){
+            console.log('button clicked: ' + gameID);
+            window.sessionStorage.setItem('gameID', gameID);
+            window.sessionStorage.setItem('master', false);
+            console.log(window.sessionStorage.getItem('gameID'));
+            window.location.href='waitingGamestart.html';
+        } else {
+            window.alert('cant join Lobby full');
         }
+    });
+}
+
+window.onload = function(){
+	var i;
+	for(i=0; i < lobbys.length; i++){
+		lobbys[i].addEventListener('click', function(){
+			chosenLobby = lobbys[i];
+		});
+	}
+};
