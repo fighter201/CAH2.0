@@ -45,3 +45,6 @@ Laden von den Packages:
     Falls das nicht so leicht funktioniert kann man auch socket.io missbrauchen um auf der client Seite dann leicht js zum laden zu benutzen
     -> Edit bene: Würde auch dann sowas wie <script> 'echo "addCardSet(blabla); </script> zum Erzeugen der grafischen Elemente gehen? 
           Zur Not würde das wahrscheinlich auch so gehen wie du gemeint hast, wobei ich aber (noch) keine Ahnung hab wie und das seinerseits ein Missbrauch von gepflegtem html ist
+
+Sonstiges:
+    createGame_functionality Methode createLobby wegen dem Leerzeichentest
