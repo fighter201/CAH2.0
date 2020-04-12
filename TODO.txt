@@ -48,3 +48,4 @@ Laden von den Packages:
 
 Sonstiges:
     createGame_functionality Methode createLobby wegen dem Leerzeichentest
+    edit: wenns so nicht funktioniert könnte es auch mit /\s/ funktionieren (ohne Anführungszeichen), das nimmt alle mögliche Whitespaces (leerzeichen, Tab, ...) mit -> hab ich weiter oben für was anderes schonmal verwendet; hab dazu auch nen Link in discord geschickt.
