@@ -1,3 +1,79 @@
-*{
-	örgendwas
+main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+  font-size: 1.1em;
+  background-color: transparent;
 }
+#content{
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: transparent;
+  width: 500px;
+}
+
+#introduction{
+  margin: 0px;
+}
+
+#gameList{
+  margin: 20px 0px;
+  padding: 0px;
+  width: 100%;
+}
+.lobbyElement{
+	border: 1px solid var(--borderColor);
+	border-radius: 4px;
+	box-shadow: 0px 0px 2px var(--boxShadow);
+	padding: 0.7em;
+	width: 100%;
+  min-width: 3px;
+}
+.lobbyElement:hover,.lobbyElement:hover:enabled, .lobbyElement:focus-within{
+  border-color: var(--secondary);
+  box-shadow: 0px 0px 3px var(--secondary);
+  background-color: var(--background);
+}
+.subContainer1{
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	justify-content: space-between;
+}
+.lobbyName{
+  margin: 0px;
+}
+/*Demo - später Prüfung über js*/
+#testLobby1 .dispPlayer{
+  color: var(--right);
+}
+#testLobby2 .dispPlayer{
+  color: var(--wrong);
+}
+/*=============================*/
+.subContainer2{
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 0.9em;
+}
+.creatorLobby{
+  color: #636366;
+}
+
+#btnBar{
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+}
+#btnBar>button{
+  margin: 0px 5px 5px 5px;
+}
+
+

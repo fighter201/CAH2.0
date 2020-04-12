@@ -19,34 +19,36 @@
 		</header>
 		<main id="main">
 			<div id="content">
+				<h2 id="introduction">Select the game you want to join:</h2>
 				<ul id="gameList">
-					<li class="lobbyElement" id="testLobby1">
+					<li><button class="lobbyElement" id="testLobby1">
 						<div class="subContainer1">
-							<h3>InterestingGameName</h3>
+							<h3 class="lobbyName">InterestingGameName</h3>
 							<span class="dispPlayer"> 
-								<span id="insideLobbyTest1">3</span> / <span id="maxLobbyTest1">5</span> 
+								<span class="dispPlayer" id="insideLobbyTest1">3</span> / <span class="dispPlayer" id="maxLobbyTest1">5</span> 
 							</span>
 						</div>
 						<div class="subContainer2">
-							<span class="creatorLobby">created by <span id="creatorLobbyTest1">nobody</span> </span>
+							<span class="creatorLobby">created by <span class="creatorLobby" id="creatorLobbyTest1">nobody</span> </span>
 						</div>
-					</li>
-					<li class="lobbyElement" id="testLobby2">
+					</button></li>
+					<li><button class="lobbyElement" id="testLobby2">
 						<div class="subContainer1">
-							<h3>LameGameName</h3>
+							<h3 class="lobbyName">LameGameName</h3>
 							<span class="dispPlayer"> 
-								<span id="insideLobbyTest2">3</span> / <span id="maxLobbyTest2">5</span> 
+								<span class="dispPlayer" id="insideLobbyTest2">5</span> / <span class="dispPlayer" id="maxLobbyTest2">5</span> 
 							</span>
 						</div>
 						<div class="subContainer2">
-							<span class="creatorLobby">created by <span id="creatorLobbyTest2">nobody</span> </span>
+							<span class="creatorLobby">created by <span class="creatorLobby" id="creatorLobbyTest2">nobody</span> </span>
 						</div>
-					</li>
+					</button></li>
 					<!-- automatisch hinzugefügte Listeneinträge -->
 				</ul>
 				
 				<div id="btnBar">
-					<button id="create Game"
+					<button id="createGame">Create your own game</button>
+					<button id="joinGame">Join the game</button>
 				</div>
 			
 			</div>

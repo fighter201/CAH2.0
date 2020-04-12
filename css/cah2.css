@@ -6,9 +6,8 @@
 	--secondary: orange;
 	--tertiary: hsl(99,37%,45%);
 	
-	--right: green;
-	--wrong: red;
-	
+	--right: #669D48;
+	--wrong: #CC1818;
 	/*basic vars (behaviour)*/
 	--hoverColor: var(--tertiary);
 	--tt: 0.8s;
