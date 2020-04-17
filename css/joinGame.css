@@ -53,6 +53,12 @@ main{
 #testLobby2 .dispPlayer{
   color: var(--wrong);
 }
+.empty{
+  color: var(--right);
+}
+.full{
+  color: var(--wrong);
+}
 /*=============================*/
 .subContainer2{
   display: flex;

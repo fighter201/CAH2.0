@@ -1,8 +1,12 @@
+console.log("joinGame_functionality.js loaded");
 const ulGameList = document.getElementById('gameList');
 const btnJoinGame = document.getElementById('joinGame');
 const btnCreateGame = document.getElementById('createGame');
+const main = document.getElementById("main");
+var mainMinSize = 500;
 var myLobbys = [];
 var chosenLobby;
+//68
 
 //useful functions ================================================
 String.prototype.isEmpty = function(){
@@ -27,20 +31,28 @@ function htmlElement(type, id, innerHTML){
 }
 //=================================================================
 
+function updateMainMinSize(increase){
+	console.log("myLobbys length:"+myLobbys.length);
+	if(myLobbys.length > 3) mainMinSize += increase;
+	main.style.minHeight = mainMinSize+"px";
+}
+
 /*	Methoden: addPlayer() -> gibt 'true' zurück, wenn erfolgreich; updateStatus()
 	Getter: .name -> gameId; .creator -> Ersteller; .player -> Anzahl Spieler in Lobby
 		.html -> HtmlElement
 */
-function LobbyElement(gameName, theCreator, maxPlayer){
+function LobbyElement(gameName, theCreator, maxPlayer, lobbyNum){
 	this.gameName = "awesomeGameName";
 	this.theCreator = "nobody";
 	this.playerInside = 0;
 	this.playerMax = 0;
+	this.num = -1;
 	
 	this.gameName = gameName;
 	this.theCreator = theCreator;
 	this.playerInside = 0;
 	this.playerMax = maxPlayer;
+	this.num = lobbyNum;
 	
 	/*
 	get name(){	return this.gameName;	}
@@ -84,27 +96,52 @@ function LobbyElement(gameName, theCreator, maxPlayer){
 	button.appendChild(sub2);
 	li.appendChild(button);
 	this.html = li;
-	
+	this.spanPlayerInLobby = insideLobby;
 	
 	//Methoden
+	this.updateStatus = function(){
+		if(this.playerInside < this.playerMax){
+			switchClass(playerCont, "empty", "full");
+			switchClass(insideLobby, "empty", "full");
+			switchClass(maxLobby, "empty", "full");
+		}
+		else {
+			switchClass(playerCont, "full", "empty");
+			switchClass(insideLobby, "full", "empty");
+			switchClass(maxLobby, "full", "empty");
+		}
+	};
 	this.addPlayer = function(){
-		if(playerInside < playerMax){
-			playerInside++;	
+		if(this.playerInside < this.playerMax){
+			this.playerInside++;
+			this.spanPlayerInLobby.innerHTML = this.playerInside;
+			this.updateStatus();
 			return true;
 		}
 		else{
 			console.log("lobby is full, could not add player");
+			this.updateStatus();
 			return false;
 		}
 	};
-	this.updateStatus = function(){
-		//TODO setze Styles, ob Lobby voll
-	};
+	this.html.addEventListener('click', function(){
+		var innerhtml = this.innerHTML;
+		var namePos = innerhtml.indexOf("lobbyName");
+		var nameStart = innerhtml.indexOf(">", namePos);
+		var nameEnd = innerhtml.indexOf("<", nameStart);
+		var name = innerhtml.substring(nameStart+1, nameEnd);
+		
+		console.log("name:"+name);
+		chosenLobby = name;
+	});
 }
 
 function addLobby(gameName, theCreator, maxPlayer){
-	myLobbys.push(new LobbyElement(gameName, theCreator, maxPlayer));
-	ulGameList.appendChild(myLobbys[0].html);
+	var lobbyNum = myLobbys.length;
+	myLobbys.push(new LobbyElement(gameName, theCreator, maxPlayer, lobbyNum));
+	ulGameList.appendChild(myLobbys[lobbyNum].html);
+	myLobbys[lobbyNum].updateStatus();
+	updateMainMinSize(76);
 }
 
 

@@ -93,7 +93,7 @@ function createLobby() {
 	console.log('input content: ' + gameName);
        
 	//test for whitespaces
-	if (gameName.includes(' ')) {
+	if (gameName.includes("<") || gameName.includes(">")) {
 		console.log('no valid gameID');
 		switchClass(gameNameError, 'show', 'hide');
 		/*addClass(inputGameName, 'inputError');*/
