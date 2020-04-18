@@ -1,68 +1,74 @@
+<!DOCTYPE html>
 <html>
     <head>
+		<title>Waiting for Gamestart | Cards Against Humanity</title>
+		<link rel="icon" href="img/icon.png" type="images/x-icon">
+		<meta charset="utf-8">
+		
+		<link rel="stylesheet" href="../css/cah2.css">
+		<link rel="stylesheet" href="../css/waitingGamestart.css">
+		
+		<script defer src="../js/waitingGamestart_functionality.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         <script> var socket = io('/lobby'); </script>
     </head>
+	
+	
     <body>
-        <p>
-            WaitingLobby
-            sakdf !!!
-        </p>
+		<header>
+			<h1>Cards Against Humanity</h1>
+		</header>
+		<main id="main">
+			<div id="content">
+				<div id="playerContent">
+					<div id="playerContentHead">
+						<h2>Players</h2>
+						<span class="dispPlayer"> 
+							<span class="dispPlayer" id="insideLobby">0</span> / <span class="dispPlayer" id="maxLobby">0</span> 
+						</span>
+					</div>
+					<ul id="playerList">
+						<li class="playerItem">
+							<span>Intense Player 1</span>
+						</li>
+						<!-- Spieler werden automatisch eingefügt -->
+					</ul>
+				</div>
+				<div class="vline"></div>
+				<div id="chatContent">
+					<h2>Chat</h2>
+				</div>
+				<div class="vline"></div>
+				<div id="settingContent">
+					<h2>Settings</h2>
+					<ul id="settingList">
+						<li>
+							<span>Setting1:<span id="setting1Value">10</span></span>
+						</li>
+					</ul>
+					<div id="btnBar">
+						<button id="changeSettings">Change settings</button>
+						<button id="startGame">Start game</button>
+					</div>
+				</div>
+			</div>
+		</main>
+		<footer>
+			<ul>
+			    <li><a href="http://www.lysin-games.com/agb">Allgemeine Gesch&auml;ftsbedingungen</a></li>
+			    <li><a href="http://www.lysin-games.com/datenschutz">Datenschutzerkl&auml;rung</a></li>
+				<li><a href="http://www.lysin-games.com/impressum">Impressum</a></li>
+			</ul>
+		</footer>
+		<!--
         <p id='lobbyID'></p>
-        <!-- only visable if user is creator -->
-        <button id='startGame', onClick='startGame()', style="visibility: hidden">please fick me</button>
+        <!-- only visable if user is creator 
+        <button id='startGame', onClick='startGame()', style="visibility: hidden">please fick me</button>-->
     </body>
 
-    <script>
+    <!--<script>
         document.getElementById('lobbyID').innerText="you are in Lobby: " + window.sessionStorage.getItem('gameID');
-    </script>
+    </script>-->
 
-    <script>
-        
-        // console.log(window.sessionStorage.getItem('master'));
-        if (window.sessionStorage.getItem('master')==='true'){
-            var button = document.getElementById('startGame');
-            button.style.visibility='visible';
-        }
-    </script>
-
-    <script>
-        
-        // checkConnection();
-
-        // console.log(socket);
-        // const gameId = 'defGameid';
-        //get user id from session variable
-        // var isMaster = false;
-        // if (isMaster){
-        //     document.getElementById('startGame').style.visibility='visible';
-        // }
-
-        //get gameId
-        // var gameId = "";
-        // var userId = "default user";
-
-
-        var gameID = window.sessionStorage.getItem('gameID');
-        var playerID = "defPlayer";
-
-        socket.emit('inWaitingLobby', gameID, playerID);
-
-        socket.on('startGame', function() {
-            window.location.href = '/game.html';
-        });
-
-        // function checkConnection(){
-        //     if (socket.connected == false){
-        //     console.log('create lobby with this id');
-        //     window.location.href = '/';
-        //     }
-        // }
-
-        function startGame() {
-            // window.location.href = '/';
-            socket.emit('gameStart', gameID);
-        }
-    </script>
 
 </html>
