@@ -10,11 +10,13 @@ class Player {
     #hand = [];
     #czar = false;
     #connected = true;
+    #inLobby = false;
 
-    constructor(id, socketID, nickname) {
+    constructor(id, nickname) {
         this.#id = id;
-        this.#socketID = socketID;
+        // this.#socketID = socketID;
         this.#nickname = nickname;
+        console.log(this.#id, this.#socketID, this.#nickname)
     }
 
     addWC(WC){
@@ -38,6 +40,30 @@ class Player {
             this.#connected = connected;
         }
         // wrong type of connected;
+    }
+
+    get inLobby(){
+        return this.#inLobby;
+    }
+
+    set inLobby(boolean){
+        if (boolean===true || boolean===false){
+            this.#inLobby = boolean;
+        } else {
+            return false;
+        }
+    }
+
+    get nickname(){
+        return this.#nickname;
+    }
+
+    get id(){
+        return this.#id;
+    }
+
+    get socketID(){
+        return this.#socketID;
     }
 
     set socketID(socketID) {

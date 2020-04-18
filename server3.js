@@ -1,5 +1,6 @@
 const DBScript = require('./sql/dbScripts.js');
 const Game = require('./js/Game.js');
+const Player = require('./js/Player.js');
 const dbConnection = require('./sql/dbConnection');
 
 var app = require('http').createServer(handler);
@@ -16,7 +17,7 @@ var CAHNSP = io.of('/CAHGame');
 var DBNSP = io.of('/DB');
 var LOBBYNSP = io.of('/lobby');
 
-var playerIDs = [];
+var players = [];
 var games=[];
 
 //answer http request
@@ -48,7 +49,7 @@ CAHNSP.on('connection', function(socket){
     //     socket.emit('createdGame', newGameID);
     // });
 
-    console.log(socket.id)
+    // console.log(socket.id)
     socket.on('joinGameReq', function(playerID, gameID){
         if (canJoinGame(playerID, gameID)) {
             socket.emit('joinGame', true);
@@ -72,6 +73,7 @@ LOBBYNSP.on('connection', function(socket){
         //settings: {name:String, maxPlayer:int>=3, maxPoints:int>0, packages:[{packagename:String, checked:boolean}], password:String};
         var gameID = getNewGameID();
         var game = new Game(gameID, settings.name, settings.password, settings.maxPlayer, settings.numHand, settings.packages);
+        game.addPlayer(new Player(playerID, 'defSocket', nickname));
         game.master = playerID;
         games.push(game);
         console.log('player: ' + playerID + '; nickname: ' , nickname + '; created game:' + gameID + '; with settings: ', settings);
@@ -85,6 +87,7 @@ LOBBYNSP.on('connection', function(socket){
     }) */
 
 DBNSP.on('connection', function(socket){
+    // console.log(socket.id);
     socket.on('packagesReq', function(){
         var req = 'SELECT name FROM packages';
         dbConnection.query(req, function(err, result, fields){
@@ -93,9 +96,15 @@ DBNSP.on('connection', function(socket){
         });
     })
 
-    socket.on('getNewPlayerID', function(){
+    socket.on('lobbyReq', function() {
+        socket.emit('lobbys', getLobbys());
+    })
+
+    socket.on('newPlayer', function(nickname){
         var newID = getNewPlayerID();
-        playerIDs.push(newID);
+        var newPlayer = new Player(nickname, newID);
+        console.log('new player added', newPlayer.id, newPlayer.nickname);
+        players.push(newPlayer);
         socket.emit('newPlayerID', newID);
     })
 })
@@ -108,14 +117,13 @@ function canJoinGame(playerID, gameID){
         //fullLobby
         return false;
     }
-
     return true;
 }
 
 function getNewGameID() {
     while (true) {
         var id = Math.random().toString(36).substring(2, 15);
-        if (getGame(id) == undefined) {
+        if (getGame(id) == null) {
             return id;
         }
     }
@@ -127,19 +135,19 @@ function getGame(gameID){
             return element;
         }
     });
-    return undefined;
+    return null;
 }
 
 function getNewPlayerID() {
-    while(true){
+    while(true) {
         var newID = Math.random().toString(36).substring(2, 15);
-        if (!playerIDs.includes(newID)){
+        if (getPlayerById(newID)===null){
             return newID;
         }
     }
 }
 
-function getPlayerById(socketID) {
+function getPlayerBySocket(socketID) {
     games.forEach(game => {
         game.players.forEach(player => {
             if (player.socketID===socketID){
@@ -150,11 +158,22 @@ function getPlayerById(socketID) {
     return null;
 }
 
+function getPlayerById(playerID){
+    for(player of players){
+        if (player.id===playerID){
+            return player;
+        }
+    }
+    return null;
+}
+
 function getLobbys() {
     var arr=[];
     games.forEach(element => {
         if (element.gamestate==='Lobby') {
-            arr.push({id:element.id, name:element.name, numPlayer:element.numPlayer, maxPlayer:element.maxPlayer});
+            // console.log(element.name, element.master, element.maxPlayer);
+            var masterNickname = getPlayerById(element.master).nickname;
+            arr.push({name:element.name, master:masterNickname, maxPlayer:element.maxPlayer});
         }
     });
     return arr;

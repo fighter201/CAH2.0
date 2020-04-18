@@ -136,6 +136,7 @@ function LobbyElement(gameName, theCreator, maxPlayer, lobbyNum){
 	});
 }
 
+//aktuelle Anzahl an Spielern?
 function addLobby(gameName, theCreator, maxPlayer){
 	var lobbyNum = myLobbys.length;
 	myLobbys.push(new LobbyElement(gameName, theCreator, maxPlayer, lobbyNum));
@@ -143,8 +144,6 @@ function addLobby(gameName, theCreator, maxPlayer){
 	myLobbys[lobbyNum].updateStatus();
 	updateMainMinSize(76);
 }
-
-
 
 btnJoinGame.addEventListener('click', function(){
 	join(gameName);
@@ -180,6 +179,18 @@ socket.on('res', function(data) {
     // return false;
 })
 	*/	
+
+function loadLobbys() {
+	var dbSocket = io('/DB');
+	dbSocket.emit('lobbyReq');
+	dbSocket.on('lobbys', function(lobbys) {
+		console.log(lobbys);
+		lobbys.forEach(lobby => {
+			addLobby(lobby.name, lobby.master, lobby.maxPlayer);
+		});
+	});
+}
+
 function join(gameID){
     // console.log('button pressed: ' + gameID);
     socket.emit('joinGame', gameID);
@@ -196,6 +207,8 @@ function join(gameID){
     });
 }
 
+
 window.onload = function(){
 	addLobby("automaticallyAdded1", "js", 10);
+	loadLobbys();
 };

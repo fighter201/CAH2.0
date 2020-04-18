@@ -36,6 +36,8 @@ class Game {
         this.#WC=this.loadWC(packages);
         this.#BC=this.loadBC(packages);
         this.#gamestate = 'Lobby';
+        
+        console.log('player', this.#players)
     }
 
     removePlayer(playerID) {
@@ -54,13 +56,13 @@ class Game {
         } else if (this.#gamestate!='Lobby') {
             return false;
         } else {
-            if (this.playerInGame(newPlayer)) {
-                return false;
-            }
+            // if (this.playerInGame(newPlayer)) {
+            //     return false;
+            // }
             this.#players.push(newPlayer);
             this.#numPlayer++;
+            console.log(this.#players[0].socketID);
             return true;
-            
         }
     }
 
@@ -151,7 +153,7 @@ class Game {
         return null;
     }
 
-    getPlayers(){
+    get players(){
         return this.#players;
     }
 
@@ -187,7 +189,15 @@ class Game {
     }
 
     get master(){
-        return this.#master
+        return this.#master;
+    }
+
+    set master(master){
+        this.#master = master;
+    }
+
+    get name(){
+        return this.#name;
     }
 
     valueOf(){
