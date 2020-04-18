@@ -95,6 +95,7 @@ function createLobby() {
 	
 	//das mit dem Leerzeichen war just for fun d.h. wir können es eigentlich raus nehmen
 	//test for whitespaces
+<<<<<<< HEAD
 	// if (gameName.includes(' ')) {
 	// 	console.log('no valid gameID');
 	// 	switchClass(gameNameError, 'show', 'hide');
@@ -102,6 +103,15 @@ function createLobby() {
 	// 	return;
 	// }
 	// else{ switchClass(gameNameError, 'hide', 'show');}
+=======
+	if (gameName.includes("<") || gameName.includes(">")) {
+		console.log('no valid gameID');
+		switchClass(gameNameError, 'show', 'hide');
+		/*addClass(inputGameName, 'inputError');*/
+		return;
+	}
+	else{ switchClass(gameNameError, 'hide', 'show');}
+>>>>>>> 82688fdc1a50e920e4c7496f1922731f9875c4b7
 	
 	//test for invalid characters in number inputs
 	if(inputMaxPlayer.value<3||inputMaxPoints.value<1){
