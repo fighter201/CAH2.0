@@ -4,7 +4,7 @@ Optik:
     - Startseite: buttons für create/join Game ✓
     - createGame: maxSpieler(3-10 vorschlag), maxPunkte(50), Spielname(String Eingabe), Spielpasswort(String Eingabe), Edit: Anzahl der Handkarten(WC) ✓
     - create Game:  WC(schlage Liste mit Packeten(Häckchen setzen) vor) ✓
-    - joinGame: Liste mit "Lobbynamen" und "Anzahl Spieler/max. Spieler ✓
+    - joinGame: Liste mit "Lobbynamen" und "Anzahl Spieler/max. Spieler ✓ joinGame_func Zeile 139 aktuelle Anzahl an Spielern
     
     In Arbeit:
     - Lobby warte-Seite: Liste mit Teilnehmer, startbutton, eventuell: chat, settings(siehe createGame)
