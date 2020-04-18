@@ -93,19 +93,9 @@ function createLobby() {
 	gameName = inputGameName.value;
 	console.log('input content: ' + gameName);
 	
-	//das mit dem Leerzeichen war just for fun d.h. wir können es eigentlich raus nehmen
-	//test for whitespaces
-	// if (gameName.includes(' ')) {
-	// 	console.log('no valid gameID');
-	// 	switchClass(gameNameError, 'show', 'hide');
-	// 	/*addClass(inputGameName, 'inputError');*/
-	// 	return;
-	// }
-	// else{ switchClass(gameNameError, 'hide', 'show');}
 	if (gameName.includes("<") || gameName.includes(">")) {
 		console.log('no valid gameID');
 		switchClass(gameNameError, 'show', 'hide');
-		/*addClass(inputGameName, 'inputError');*/
 		return;
 	}
 	else{ switchClass(gameNameError, 'hide', 'show');}
