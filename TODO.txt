@@ -7,7 +7,8 @@ Optik:
     - joinGame: Liste mit "Lobbynamen" und "Anzahl Spieler/max. Spieler ✓
     
     In Arbeit:
-    - Lobby warte-Seite: Liste mit Teilnehmer, startbutton, eventuell: chat, settings(siehe createGame)
+    - Lobby warte-Seite: Liste mit Teilnehmer, startbutton, eventuell: chat, settings(siehe createGame) 
+        -> Möglichkeit für Host, Einstellung nochmal zu bearbeiten, chat usw. währenddessen weiterhin sichtbar
         
 
     Ausstehend:
@@ -47,5 +48,4 @@ Laden von den Packages:
           Zur Not würde das wahrscheinlich auch so gehen wie du gemeint hast, wobei ich aber (noch) keine Ahnung hab wie und das seinerseits ein Missbrauch von gepflegtem html ist
 
 Sonstiges:
-    createGame_functionality Methode createLobby wegen dem Leerzeichentest
-    edit: wenns so nicht funktioniert könnte es auch mit /\s/ funktionieren (ohne Anführungszeichen), das nimmt alle mögliche Whitespaces (leerzeichen, Tab, ...) mit -> hab ich weiter oben für was anderes schonmal verwendet; hab dazu auch nen Link in discord geschickt.
+    
