@@ -37,7 +37,7 @@ Optik:
 
 Engine:
     - createGame:
-        - alles was sonst noch nötig ist -> Einstellungen abspeichern, hinterlegte CardSets einfüttern, ...
+        - alles was sonst noch nötig ist -> Einstellungen abspeichern, hinterlegte CardSets einfüttern, ... ✓
     
 Laden von den Packages:
     Der Datenbankzugriff auf der client Seite muss mit php gemacht werden nicht js(problem ist auf der client Seite gibt es kein "require" was man für die db verbindung braucht).

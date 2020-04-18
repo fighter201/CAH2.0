@@ -35,6 +35,7 @@ class Game {
         //load WC BC from packages
         this.#WC=this.loadWC(packages);
         this.#BC=this.loadBC(packages);
+        this.#gamestate = 'Lobby';
     }
 
     removePlayer(playerID) {

@@ -3,6 +3,7 @@ const inputGameName = document.getElementById('gameName');
 const inputMaxPlayer = document.getElementById('maxPlayer');
 const inputMaxPoints = document.getElementById('maxPoints');
 const inputPassword = document.getElementById('password');
+const inputNumbCard = document.getElementById('numbCards');
 const ulSetList = document.getElementById('setList');
 const gameNameError = document.getElementById('gameNameError');
 const numbError = document.getElementById('numbError');
@@ -91,15 +92,16 @@ function checkEntries(){
 function createLobby() {
 	gameName = inputGameName.value;
 	console.log('input content: ' + gameName);
-       
+	
+	//das mit dem Leerzeichen war just for fun d.h. wir können es eigentlich raus nehmen
 	//test for whitespaces
-	if (gameName.includes(' ')) {
-		console.log('no valid gameID');
-		switchClass(gameNameError, 'show', 'hide');
-		/*addClass(inputGameName, 'inputError');*/
-		return;
-	}
-	else{ switchClass(gameNameError, 'hide', 'show');}
+	// if (gameName.includes(' ')) {
+	// 	console.log('no valid gameID');
+	// 	switchClass(gameNameError, 'show', 'hide');
+	// 	/*addClass(inputGameName, 'inputError');*/
+	// 	return;
+	// }
+	// else{ switchClass(gameNameError, 'hide', 'show');}
 	
 	//test for invalid characters in number inputs
 	if(inputMaxPlayer.value<3||inputMaxPoints.value<1){
@@ -107,39 +109,48 @@ function createLobby() {
 		return;
 	}
 	else{ switchClass(numbError, 'hide', 'show');}
+
+	var settings = extractSettings();
+	var socket = io('/lobby');
+	var playerID = window.sessionStorage.getItem('playerID');
+	console.log(window.sessionStorage.getItem('nickname'))
+	socket.emit('createLobby', settings, playerID, window.sessionStorage.getItem('nickname'));
 }
-	// var settings = extractSettings();
-
-
-/*
-	var gameID = gameName;
-	var userID = 'default user';
-	var settings = [3, '5min'];
-	socket.emit('createGame', userID, gameID, settings);
-	socket.on('duplicatedGameID', function(duplicate) {
-		if (!duplicate){
-			window.sessionStorage.setItem('gameID', gameID);
-			window.sessionStorage.setItem('master', true);
-			window.location.href = lobbyUrl;
-		} else {
-			alert('duplicated gameID');
-		}
-	});*/
-
 
 function extractSettings() {
+	// console.log('extractSettings now');
+	var packagesList = document.getElementById('setList').children;
+	// console.log(packagesList);
+	// console.log(packagesList.length);
+	var packageArr = [] //[{packagename:String, checked:boolean}]
+	for(var i=0; i<packagesList.length; i++){
+		packageArr.push({packagename:packagesList[i].innerText, checked:packagesList[i].firstChild.checked})
+		// console.log(packageArr);
+	}
 	return {
 		name : inputGameName.value,
 		maxPlayer : inputMaxPlayer.value,
 		maxPoints : inputMaxPoints.value,
-		//packages : {packagename:boolean} TODO
-		password : inputPassword.value
+		packages : packageArr,
+		password : inputPassword.value,
+		numHand : inputNumbCard.value
 	};
+}
+
+function loadPackages(){
+	var dbSocket = io('/DB');
+	dbSocket.emit('packagesReq');
+	dbSocket.on('packages', function(result) {
+		result.forEach(element => {
+			addCardSet(element.name);
+		});
+	});
 }
 
 btnApply.addEventListener('click', createLobby);
 
 window.onload = function(){
+	loadPackages();
 	checkEntries();
 	for(x in writables) writables[x].addEventListener('keyup', checkEntries);
 	addCardSet("automatically added	1");

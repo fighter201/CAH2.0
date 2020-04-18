@@ -45,7 +45,8 @@ btnJoin.addEventListener('click', joinGame);
 
 //nickname to sessionvariable
 function saveNickname(){
-	window.sessionStorage.setItem(nickname, inputNickname);
+	window.sessionStorage.setItem('nickname', inputNickname.value);
+	console.log(window.sessionStorage.getItem('nickname'))
 }
 
 //button onclick
@@ -60,7 +61,16 @@ function joinGame() {
 	window.location.href='joinGame.html';
 }
 
+function setPlayerID(){
+	var socket = io('/DB');
+	socket.emit('getNewPlayerID');
+	socket.on('newPlayerID', function(newPlayerID){
+		window.sessionStorage.setItem('playerID', newPlayerID);
+	})
+}
+
 window.onload = function(){
+	this.setPlayerID();
 	console.log("window onload event");
 	inputNickname.setAttribute("maxlength", maxNickname);
 	inputNickname.focus();

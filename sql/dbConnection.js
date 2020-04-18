@@ -21,4 +21,4 @@ function getConnection() {
 }
 
 // export default getConnection;
-module.exports = getConnection;
+module.exports = getConnection();
