@@ -59,11 +59,21 @@ LOBBYNSP.on('connection', function(socket){
         })
         // console.log(packages)
         var game = new Game(gameID, settings.name, settings.password, settings.maxPlayer, settings.numHand, packages);
-        game.addPlayer(new Player(playerID, 'defSocket', nickname));
+        game.addPlayer(new Player(playerID, nickname));
         game.master = playerID;
         games.push(game);
-        console.log('created Game:', game.toString());
+        console.log('created Lobby:', game.toString());
+
+        //testing
         game.startGame();
+        setInterval(function(){
+            console.log(game.ready);
+            if (game.ready){
+                console.log('ready');
+                clearInterval(this);
+            }
+        },1000);
+
         // console.log('player: ' + playerID + '; nickname: ' , nickname + '; created game:' + gameID + '; with settings: ', settings);
     });
 
@@ -79,6 +89,14 @@ LOBBYNSP.on('connection', function(socket){
         var game = getGame(gameID);
         if (game!==null){
             game.startGame();
+            setInterval(function(){
+                console.log(game.ready);
+                if (game.ready){
+                    console.log('ready');
+                    clearInterval(this);
+                    io.to(gameID).emit('gameStart');
+                }
+            },1000);
         }
     });
 })
@@ -99,9 +117,11 @@ DBNSP.on('connection', function(socket){
 
     socket.on('newPlayer', function(nickname){
         var newID = getNewPlayerID();
-        var newPlayer = new Player(nickname, newID);
+        var newPlayer = new Player(newID, nickname);
         // console.log('new player added', newPlayer.id, newPlayer.nickname);
         players.push(newPlayer);
+        // console.log(players[0].toString());
+        // console.log(getPlayerById(newID));
         socket.emit('newPlayerID', newID);
     })
 })
@@ -156,8 +176,10 @@ function getPlayerBySocket(socketID) {
 }
 
 function getPlayerById(playerID){
+    // console.log(players);
+    // console.log('looking for', playerID)
     for(player of players){
-        if (player.id===playerID){
+        if (player.id==playerID){
             return player;
         }
     }
@@ -170,7 +192,7 @@ function getLobbys() {
         if (element.gamestate==='Lobby') {
             // console.log(element.name, element.master, element.maxPlayer);
             var masterNickname = getPlayerById(element.master).nickname;
-            arr.push({name:element.name, master:masterNickname, maxPlayer:element.maxPlayer});
+            arr.push({name:element.name, master:masterNickname, numPlayer: element.numPlayer, maxPlayer:element.maxPlayer});
         }
     });
     return arr;

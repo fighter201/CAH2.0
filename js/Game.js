@@ -21,6 +21,7 @@ class Game {
     #winner='';
     #czar={}; // Playerobj
     #players=[]; //Playerobjekte
+    #ready=false; //true wenn startGame erfolgreich war
 
     constructor(id, name, password, maxPlayer, numHand, packages) {
         if (maxPlayer < 3) {
@@ -62,40 +63,39 @@ class Game {
         }
     }
 
-    async startGame(){
+    startGame(){
         if (this.#gamestate!=='Lobby'){
             return false;
+        }       
+        
+        var WCIDs = [];
+        var BCIDs = [];
+        var req = 'SELECT BC, WC FROM packages WHERE';
+        
+        for (var i = 0; i<this.#packages.length; i++){
+            if (i==0){
+                req += ' name = "' + this.#packages[i].packagename + '"';
+            } else {
+                req += ' OR name = "' + this.#packages[i].packagename + '"';
+            }
         }
-
-        var cards = await getCards(this.#packages);
-        console.log('cardIds')
-        console.log(cards.WC);
-        //load Cards
-        // var WCIDs = [];
-        // var BCIDs = [];
-        
-        // this.#packages.forEach(pack => {
-        //     console.log(pack);
-        //     // var name = this.#packages[helper].packagename
-        //     // var boolean = false;
-        //     var req = 'SELECT BC, WC FROM packages WHERE name = "' + pack.packagename + '"';
-        //     dbConnection.query(req, function(err, result, fields) {
-        //         WCIDs.push(result[0].WC);
-        //         BCIDs.push(result[0].BC);
-        //         if (pack.packagename === last){
-        //             console.log(WCIDs, BCIDs);  
-        //             console.log('finsihed');
-        //             finsihed = true;  
-        //         }
-        //     });
-        // });
-       
-        
-            this.newRound();
-            this.#gamestate="Running";
-        
+        // console.log(req);
+        // var gameID = this.gameID;
+        var obj = this;
+        dbConnection.query(req, function(err, result, fields){
+            for (var i = 0; i<result.length; i++){
+                WCIDs.push(result[i].WC)
+                BCIDs.push(result[i].BC)
+            }
+            console.log(WCIDs);
+            console.log(BCIDs);
+            obj.newRound();
+            obj.#gamestate="Running";
+            obj.#ready=true;
+        });
+        console.log('exiting method');
     }
-    
+
     newRound(){
         if (!this.checkForWinner()){
             this.newCzar;
@@ -141,6 +141,10 @@ class Game {
     }
 
     checkForWinner(){
+        if (this.#players.length===0){
+            return false;
+        }
+        // console.log(this.#players);
         this.#players.sort(function(a,b){return a-b})
         if (this.#players[0].score>=this.#maxPoints) {
             this.#gamestate='End';
@@ -212,6 +216,10 @@ class Game {
         return this.#name;
     }
 
+    get ready(){
+        return this.#ready;
+    }
+
     valueOf(){
         return this.#id;
     }
@@ -221,21 +229,6 @@ class Game {
     }
 }
 
-async function getCards(packages) {
-    var WCIDs = [];
-    var BCIDs = [];
-    packages.forEach(pack => {
-        console.log(pack);
-        var req = 'SELECT BC, WC FROM packages WHERE name = "' + pack.packagename + '"';
-        dbConnection.query(req, function(err, result, fields) {
-            WCIDs.push(result[0].WC);
-            BCIDs.push(result[0].BC);
-            console.log(WCIDs)
-            console.log(BCIDs)
-        });
-    });
-    console.log('finsihed loading');
-    return {'BC': BCIDs, 'WC': WCIDs};
-}
+
 
 module.exports = Game;

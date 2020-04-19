@@ -157,7 +157,7 @@ function loadLobbys() {
 	dbSocket.on('lobbys', function(lobbys) {
 		console.log(lobbys);
 		lobbys.forEach(lobby => {
-			addLobby(lobby.name, lobby.master, lobby.maxPlayer);
+			addLobby(lobby.name, lobby.master, lobby.numPlayer, lobby.maxPlayer);
 		});
 	});
 }
@@ -180,6 +180,6 @@ function join(gameID){
 
 
 window.onload = function(){
-	addLobby("automaticallyAdded1", "js", 10);
+	addLobby("automaticallyAdded1", "js", 5, 10);
 	loadLobbys();
 };
