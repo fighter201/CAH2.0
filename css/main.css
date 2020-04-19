@@ -54,7 +54,7 @@ button{
 #btnDiv{
 	z-index: 10;
 }
-
+/*
 @media (device-width < 450px){
 	#welcome{
 		font-size: 4vh;
@@ -69,4 +69,4 @@ button{
 	a{
 		font-size: 2em;
 	}
-}
+}*/

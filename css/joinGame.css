@@ -2,7 +2,6 @@ main{
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 500px;
   font-size: 1.1em;
   background-color: transparent;
 }
@@ -13,6 +12,7 @@ main{
   justify-content: center;
   background-color: transparent;
   width: 500px;
+  margin: 10px;
 }
 
 #introduction{

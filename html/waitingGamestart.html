@@ -4,9 +4,11 @@
 		<title>Waiting for Gamestart | Cards Against Humanity</title>
 		<link rel="icon" href="img/icon.png" type="images/x-icon">
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
 		<link rel="stylesheet" href="../css/cah2.css">
 		<link rel="stylesheet" href="../css/waitingGamestart.css">
+		<!--<link rel="stylesheet" href="../css/waitingGamestart_grid.css">-->
 		
 		<script defer src="../js/waitingGamestart_functionality.js"></script>
         <script src="/socket.io/socket.io.js"></script>
@@ -27,6 +29,7 @@
 							<span class="dispPlayer" id="insideLobby">0</span> / <span class="dispPlayer" id="maxLobby">0</span> 
 						</span>
 					</div>
+					<div class="hline"></div>
 					<ul id="playerList">
 						<li class="playerItem">
 							<span>Intense Player 1</span>
@@ -36,15 +39,18 @@
 				</div>
 				<div class="vline"></div>
 				<div id="chatContent">
-					<h2>Chat</h2>
+					<h2 id="lobbyName">This could be your add</h2>
+					<div id="chatFrame">
+						<!--TODO-->
+					</div>
 				</div>
 				<div class="vline"></div>
 				<div id="settingContent">
 					<h2>Settings</h2>
 					<ul id="settingList">
-						<li>
-							<span>Setting1:<span id="setting1Value">10</span></span>
-						</li>
+						<li><span>Round ends at <span class="settingValue" id="maxPoints">10</span> points</span></li>
+						<li><span>White Cards per player: <span class="settingValue" id="numbCards">10</span></span></li>
+						<li><span>Time limit: <span class="settingValue" id="timeLimit">disabled</span></span></li>
 					</ul>
 					<div id="btnBar">
 						<button id="changeSettings">Change settings</button>

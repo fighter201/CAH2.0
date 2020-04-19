@@ -1,3 +1,10 @@
+*{
+  box-sizing: border-box;
+}
+h2{
+  margin: 10px 0px;
+}
+
 main{
   display: flex;
   justify-content: center;
@@ -17,11 +24,26 @@ main{
   justify-content: space-between;
   background-color: transparent;
 }
+#content>div:not(.vline){
+  height: 100%;
+  padding: 10px;
+}
 
 #playerContent{
   height: 100%;
-  flex-grow: 0;
-  margin: 10px;
+  min-width: 200px;
+  flex-grow: 1;
+  padding: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+}
+#playerContent .hline{
+  margin: 0px;
+  box-shadow: none;
+  height: 2px;
+}
+#playerContent+.vline{
+  margin-left: 0px;
 }
 #playerContentHead{
   display: flex;
@@ -29,15 +51,36 @@ main{
   align-items: center;
   justify-content: space-between;
 }
+.dispPlayer{
+  font-size: 1.1em;
+  color: rgba(0, 0, 0, 0.5);
+}
+#playerList{
+  overflow-y: scroll;
+  padding-left: 0px;
+  padding-right: 10px;
+  height: 100%;
+}
 /*overflow-y: scroll*/
 #chatContent{
-  flex-grow: 1;
+  flex-grow: 5;
 }
 
 #settingContent{
   flex-grow: 0;
 }
-
+#chatContent+.vline{
+  margin-right: 0px;
+}
+#settingList{
+  padding: 0px;
+}
+.settingValue{
+  font-weight: bold;
+}
+#btnBar>button{
+  margin: 5px;
+}
 
 
 @media (device-width < 800px){

@@ -13,6 +13,7 @@ main{
   align-items: flex-end;
   justify-content: center;
   background-color: transparent;
+  margin: 10px;
 }
 #content > ul{
   border: 1px solid var(--borderColor);
@@ -46,6 +47,7 @@ input{
   margin: 0px 5px;
 }
 
+/*
 @media (device-width < 450px){
   #content{
     width: 90%;
@@ -67,4 +69,4 @@ input{
     width: 250px;
     padding: 10px;
   }
-}
+}*/
