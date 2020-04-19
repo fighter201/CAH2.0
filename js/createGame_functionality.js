@@ -110,8 +110,9 @@ function createLobby() {
 	var settings = extractSettings();
 	var socket = io('/lobby');
 	var playerID = window.sessionStorage.getItem('playerID');
-	console.log(window.sessionStorage.getItem('nickname'))
-	socket.emit('createLobby', settings, playerID, window.sessionStorage.getItem('nickname'));
+	var nickname = window.sessionStorage.getItem('nickname');
+	socket.emit('createLobby', settings, playerID, nickname);
+	window.sessionStorage.setItem('master', true);
 }
 
 function extractSettings() {
