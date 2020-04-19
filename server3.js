@@ -1,4 +1,3 @@
-const DBScript = require('./sql/dbScripts.js');
 const Game = require('./js/Game.js');
 const Player = require('./js/Player.js');
 const dbConnection = require('./sql/dbConnection');
@@ -43,28 +42,7 @@ function handler (req, res) {
 
 //CAH Namespace
 CAHNSP.on('connection', function(socket){
-    // socket.on('createGame', function(input) {
-    //     var newGameID = getNewGameID();
-    //     games.push(new Game(newGameID, input.name, input.password, input.maxPlayer, input.numHand, input.packages));
-    //     socket.emit('createdGame', newGameID);
-    // });
-
-    // console.log(socket.id)
-    socket.on('joinGameReq', function(playerID, gameID){
-        if (canJoinGame(playerID, gameID)) {
-            socket.emit('joinGame', true);
-        } else {
-            socket.emit('joinGame', false);
-        }
-    });
-
-    socket.on('disconnect', function(){
-        player = getPlayerById(socket.id);
-        if (player!==null) {
-            player.connected=false;
-            player.socketID='';
-        }
-    });
+    
 });
 
 LOBBYNSP.on('connection', function(socket){
@@ -72,19 +50,38 @@ LOBBYNSP.on('connection', function(socket){
     socket.on('createLobby', function(settings, playerID, nickname){
         //settings: {name:String, maxPlayer:int>=3, maxPoints:int>0, packages:[{packagename:String, checked:boolean}], password:String};
         var gameID = getNewGameID();
-        var game = new Game(gameID, settings.name, settings.password, settings.maxPlayer, settings.numHand, settings.packages);
+        var packages = settings.packages.filter(function(package){
+            if (package.checked){
+                return true;
+            } else {
+                return false;
+            }
+        })
+        // console.log(packages)
+        var game = new Game(gameID, settings.name, settings.password, settings.maxPlayer, settings.numHand, packages);
         game.addPlayer(new Player(playerID, 'defSocket', nickname));
         game.master = playerID;
         games.push(game);
-        console.log('player: ' + playerID + '; nickname: ' , nickname + '; created game:' + gameID + '; with settings: ', settings);
+        console.log('created Game:', game.toString());
+        game.startGame();
+        // console.log('player: ' + playerID + '; nickname: ' , nickname + '; created game:' + gameID + '; with settings: ', settings);
+    });
+
+    socket.on('inLobby', function(gameID){
+        socket.join(gameID);
+    });
+
+    socket.on('chatmessage', function(source, message, gameID){
+        io.to(gameID).emit('newChatMessage', source, message, gameID);
+    });
+
+    socket.on('startGame', function(gameID){
+        var game = getGame(gameID);
+        if (game!==null){
+            game.startGame();
+        }
     });
 })
-
-    /* socket.on('createGame', function(newGameID){
-        window.sessionStorage.setItem('master', true);
-        window.sessionStorage.setItem('gameID', newGameID);
-        window.location.href='/waitingGamestart';
-    }) */
 
 DBNSP.on('connection', function(socket){
     // console.log(socket.id);
@@ -103,7 +100,7 @@ DBNSP.on('connection', function(socket){
     socket.on('newPlayer', function(nickname){
         var newID = getNewPlayerID();
         var newPlayer = new Player(nickname, newID);
-        console.log('new player added', newPlayer.id, newPlayer.nickname);
+        // console.log('new player added', newPlayer.id, newPlayer.nickname);
         players.push(newPlayer);
         socket.emit('newPlayerID', newID);
     })

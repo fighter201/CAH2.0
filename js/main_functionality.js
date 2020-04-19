@@ -4,7 +4,7 @@ const btnCreate = document.getElementById('btnCreate');
 const btnJoin = document.getElementById('btnJoin');
 const maxNickname = 32;
 const joinGameUrl = 'joinGame.html';
-const createGameUrl = 'creatGame.html';
+const createGameUrl = 'createGame.html';
 let nickname;
 
 //useful functions ================================================

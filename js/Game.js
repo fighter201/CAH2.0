@@ -1,4 +1,5 @@
 const Player = require('./Player.js')
+const dbConnection = require('../sql/dbConnection');
 
 class Game {
 
@@ -16,6 +17,7 @@ class Game {
     // #settings={}; //{numHand:int, maxPoint:int }
     #numHand=5;
     #maxPoints=10;
+    #packages = []; //[packageID]
     #winner='';
     #czar={}; // Playerobj
     #players=[]; //Playerobjekte
@@ -30,14 +32,9 @@ class Game {
         this.#password = password;
         this.#maxPlayer = maxPlayer;
         this.#numHand = numHand;
-        // this.#master = master;
-
-        //load WC BC from packages
-        this.#WC=this.loadWC(packages);
-        this.#BC=this.loadBC(packages);
-        this.#gamestate = 'Lobby';
+        this.#packages = packages;
         
-        console.log('player', this.#players)
+        this.#gamestate = 'Lobby';
     }
 
     removePlayer(playerID) {
@@ -61,19 +58,44 @@ class Game {
             // }
             this.#players.push(newPlayer);
             this.#numPlayer++;
-            console.log(this.#players[0].socketID);
             return true;
         }
     }
 
-    startGame(){
+    async startGame(){
         if (this.#gamestate!=='Lobby'){
             return false;
         }
-        this.#gamestate="Running";
-        this.newRound();
-    }
 
+        var cards = await getCards(this.#packages);
+        console.log('cardIds')
+        console.log(cards.WC);
+        //load Cards
+        // var WCIDs = [];
+        // var BCIDs = [];
+        
+        // this.#packages.forEach(pack => {
+        //     console.log(pack);
+        //     // var name = this.#packages[helper].packagename
+        //     // var boolean = false;
+        //     var req = 'SELECT BC, WC FROM packages WHERE name = "' + pack.packagename + '"';
+        //     dbConnection.query(req, function(err, result, fields) {
+        //         WCIDs.push(result[0].WC);
+        //         BCIDs.push(result[0].BC);
+        //         if (pack.packagename === last){
+        //             console.log(WCIDs, BCIDs);  
+        //             console.log('finsihed');
+        //             finsihed = true;  
+        //         }
+        //     });
+        // });
+       
+        
+            this.newRound();
+            this.#gamestate="Running";
+        
+    }
+    
     newRound(){
         if (!this.checkForWinner()){
             this.newCzar;
@@ -82,16 +104,6 @@ class Game {
             return true;
         }
         return false;
-    }
-
-    loadWC(packages) {
-        //TODO
-        return [];
-    }
-
-    loadBC(packages){
-        //TODO
-        return [];
     }
 
     newBC() {
@@ -204,6 +216,26 @@ class Game {
         return this.#id;
     }
 
+    toString(){
+        return '{id: ' + this.#id + ', name: ' + this.#name + ', master: ' + this.#master + ', password: ' + this.#password + '}';
+    }
+}
+
+async function getCards(packages) {
+    var WCIDs = [];
+    var BCIDs = [];
+    packages.forEach(pack => {
+        console.log(pack);
+        var req = 'SELECT BC, WC FROM packages WHERE name = "' + pack.packagename + '"';
+        dbConnection.query(req, function(err, result, fields) {
+            WCIDs.push(result[0].WC);
+            BCIDs.push(result[0].BC);
+            console.log(WCIDs)
+            console.log(BCIDs)
+        });
+    });
+    console.log('finsihed loading');
+    return {'BC': BCIDs, 'WC': WCIDs};
 }
 
 module.exports = Game;
