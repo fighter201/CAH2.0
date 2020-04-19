@@ -41,7 +41,7 @@ function updateMainMinSize(increase){
 	Getter: .name -> gameId; .creator -> Ersteller; .player -> Anzahl Spieler in Lobby
 		.html -> HtmlElement
 */
-function LobbyElement(gameName, theCreator, maxPlayer, lobbyNum){
+function LobbyElement(gameName, theCreator, nowPlayer, maxPlayer, lobbyNum){
 	this.gameName = "awesomeGameName";
 	this.theCreator = "nobody";
 	this.playerInside = 0;
@@ -50,7 +50,7 @@ function LobbyElement(gameName, theCreator, maxPlayer, lobbyNum){
 	
 	this.gameName = gameName;
 	this.theCreator = theCreator;
-	this.playerInside = 0;
+	this.playerInside = nowPlayer;
 	this.playerMax = maxPlayer;
 	this.num = lobbyNum;
 	
@@ -136,10 +136,9 @@ function LobbyElement(gameName, theCreator, maxPlayer, lobbyNum){
 	});
 }
 
-//aktuelle Anzahl an Spielern?
-function addLobby(gameName, theCreator, maxPlayer){
+function addLobby(gameName, theCreator, nowPlayer, maxPlayer){
 	var lobbyNum = myLobbys.length;
-	myLobbys.push(new LobbyElement(gameName, theCreator, maxPlayer, lobbyNum));
+	myLobbys.push(new LobbyElement(gameName, theCreator, nowPlayer, maxPlayer, lobbyNum));
 	ulGameList.appendChild(myLobbys[lobbyNum].html);
 	myLobbys[lobbyNum].updateStatus();
 	updateMainMinSize(76);
