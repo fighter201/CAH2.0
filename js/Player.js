@@ -16,7 +16,7 @@ class Player {
         this.#id = id;
         // this.#socketID = socketID;
         this.#nickname = nickname;
-        console.log(this.#id, this.#socketID, this.#nickname)
+        // console.log(this.#id, this.#socketID, this.#nickname)
     }
 
     addWC(WC){
@@ -74,8 +74,8 @@ class Player {
         this.#score++;
     }
 
-    valueOf(){
-        return this.#id;
+    toString(){
+        return '{id: ' + this.#id + ', name: ' + this.#nickname + '}';
     }
 
 }

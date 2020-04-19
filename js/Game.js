@@ -1,4 +1,5 @@
 const Player = require('./Player.js')
+const dbConnection = require('../sql/dbConnection');
 
 class Game {
 
@@ -16,9 +17,11 @@ class Game {
     // #settings={}; //{numHand:int, maxPoint:int }
     #numHand=5;
     #maxPoints=10;
+    #packages = []; //[packageID]
     #winner='';
     #czar={}; // Playerobj
     #players=[]; //Playerobjekte
+    #ready=false; //true wenn startGame erfolgreich war
 
     constructor(id, name, password, maxPlayer, numHand, packages) {
         if (maxPlayer < 3) {
@@ -30,14 +33,9 @@ class Game {
         this.#password = password;
         this.#maxPlayer = maxPlayer;
         this.#numHand = numHand;
-        // this.#master = master;
-
-        //load WC BC from packages
-        this.#WC=this.loadWC(packages);
-        this.#BC=this.loadBC(packages);
-        this.#gamestate = 'Lobby';
+        this.#packages = packages;
         
-        console.log('player', this.#players)
+        this.#gamestate = 'Lobby';
     }
 
     removePlayer(playerID) {
@@ -61,7 +59,6 @@ class Game {
             // }
             this.#players.push(newPlayer);
             this.#numPlayer++;
-            console.log(this.#players[0].socketID);
             return true;
         }
     }
@@ -69,9 +66,34 @@ class Game {
     startGame(){
         if (this.#gamestate!=='Lobby'){
             return false;
+        }       
+        
+        var WCIDs = [];
+        var BCIDs = [];
+        var req = 'SELECT BC, WC FROM packages WHERE';
+        
+        for (var i = 0; i<this.#packages.length; i++){
+            if (i==0){
+                req += ' name = "' + this.#packages[i].packagename + '"';
+            } else {
+                req += ' OR name = "' + this.#packages[i].packagename + '"';
+            }
         }
-        this.#gamestate="Running";
-        this.newRound();
+        // console.log(req);
+        // var gameID = this.gameID;
+        var obj = this;
+        dbConnection.query(req, function(err, result, fields){
+            for (var i = 0; i<result.length; i++){
+                WCIDs.push(result[i].WC)
+                BCIDs.push(result[i].BC)
+            }
+            console.log(WCIDs);
+            console.log(BCIDs);
+            obj.newRound();
+            obj.#gamestate="Running";
+            obj.#ready=true;
+        });
+        console.log('exiting method');
     }
 
     newRound(){
@@ -82,16 +104,6 @@ class Game {
             return true;
         }
         return false;
-    }
-
-    loadWC(packages) {
-        //TODO
-        return [];
-    }
-
-    loadBC(packages){
-        //TODO
-        return [];
     }
 
     newBC() {
@@ -129,6 +141,10 @@ class Game {
     }
 
     checkForWinner(){
+        if (this.#players.length===0){
+            return false;
+        }
+        // console.log(this.#players);
         this.#players.sort(function(a,b){return a-b})
         if (this.#players[0].score>=this.#maxPoints) {
             this.#gamestate='End';
@@ -200,10 +216,19 @@ class Game {
         return this.#name;
     }
 
+    get ready(){
+        return this.#ready;
+    }
+
     valueOf(){
         return this.#id;
     }
 
+    toString(){
+        return '{id: ' + this.#id + ', name: ' + this.#name + ', master: ' + this.#master + ', password: ' + this.#password + '}';
+    }
 }
+
+
 
 module.exports = Game;

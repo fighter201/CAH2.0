@@ -151,41 +151,13 @@ btnCreateGame.addEventListener('click', function(){
 	window.location.href='createGame.html';
 });
 
-/*
-socket = io('/DB');
-socket.emit('getGames');
-socket.on('res', function(data) {
-    var liste = document.getElementById('gameList');
-    var initialContent = liste.innerHTML;
-    
-    if (initialContent === undefined){
-        initialContent = "";
-    }
-
-    // console.log(data.length);
-    
-    var newContent = '';
-    var oldContent = initialContent;
-    // // liste.innerHTML='<li>ein weiterer test</li>';
-    data.forEach(element => {
-        var gameID = element.gameID;
-        newContent = oldContent + "<li><button id='" + gameID + "', onclick=\"join('" + gameID + "')\">" + gameID +"</button></li>";
-        oldContent = newContent;
-    });
-
-    liste.innerHTML = newContent;
-    // socket.disconnect();
-    // return false;
-})
-	*/	
-
 function loadLobbys() {
 	var dbSocket = io('/DB');
 	dbSocket.emit('lobbyReq');
 	dbSocket.on('lobbys', function(lobbys) {
 		console.log(lobbys);
 		lobbys.forEach(lobby => {
-			addLobby(lobby.name, lobby.master, lobby.maxPlayer);
+			addLobby(lobby.name, lobby.master, lobby.numPlayer, lobby.maxPlayer);
 		});
 	});
 }
@@ -208,6 +180,6 @@ function join(gameID){
 
 
 window.onload = function(){
-	addLobby("automaticallyAdded1", "js", 10);
+	addLobby("automaticallyAdded1", "js", 5, 10);
 	loadLobbys();
 };
