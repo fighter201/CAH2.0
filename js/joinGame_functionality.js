@@ -3,7 +3,7 @@ const ulGameList = document.getElementById('gameList');
 const btnJoinGame = document.getElementById('joinGame');
 const btnCreateGame = document.getElementById('createGame');
 const main = document.getElementById("main");
-var mainMinSize = 500;
+var mainMinSize = 400;
 var myLobbys = [];
 var chosenLobby;
 //68
