@@ -1,0 +1,12 @@
+#settingListHost{
+	display: none;
+}
+#changeSettings{
+  display: none;
+}
+#startGame{
+  display: none;
+}
+#settingContent{
+  min-width: 260px;
+}

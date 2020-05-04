@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <head>
+    <head id="head">
 		<title>Waiting for Gamestart | Cards Against Humanity</title>
 		<link rel="icon" href="img/icon.png" type="images/x-icon">
 		<meta charset="utf-8">
@@ -47,14 +47,19 @@
 				<div class="vline"></div>
 				<div id="settingContent">
 					<h2>Settings</h2>
-					<ul id="settingList">
+					<!-- for members -->
+					<ul id="settingListMember">
 						<li><span>Round ends at <span class="settingValue" id="maxPoints">10</span> points</span></li>
 						<li><span>White Cards per player: <span class="settingValue" id="numbCards">10</span></span></li>
 						<li><span>Time limit: <span class="settingValue" id="timeLimit">disabled</span></span></li>
 					</ul>
+					<!-- for host -->
+					<ul id="settingListHost">
+						<!-- content added by js -->
+					</ul>
 					<div id="btnBar">
-						<button id="changeSettings">Change settings</button>
-						<button id="startGame">Start game</button>
+						<button id="changeSettings" disabled>Apply Changes</button>
+						<button id="startGame" disabled>Start game</button>
 					</div>
 				</div>
 			</div>

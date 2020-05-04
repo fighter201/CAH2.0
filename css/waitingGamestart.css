@@ -75,7 +75,7 @@ main{
 #chatContent+.vline{
   margin-right: 0px;
 }
-#settingList{
+#settingListMember, #settingListHost{
   padding: 0px;
 }
 .settingValue{
