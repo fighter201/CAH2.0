@@ -1,0 +1,89 @@
+/*==================================== allgemeine styles ============================================*/
+.card{
+  width: 250px;
+  height: 230px;
+  border: 1px solid #CBCBCB; /*var(--borderColor)*/
+  border-radius: 4px;
+  box-shadow: 0px 0px 4px var(--boxShadow); /*var(--boxShadow)*/
+  margin: 10px;
+  font-size: 1.2em;
+  line-height: 1.2;
+  
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+}
+.card .card_text{
+  padding: 0px 25px;
+}
+.card>.card_close{
+  width: 100%;
+  padding: 10px 10px 0px 10px;
+  display: flex;
+  flex-flow: row-reverse nowrap;
+  background: transparent;
+}
+.card_bottom{
+  min-height: 30px;
+  padding: 0px;
+  display: flex;
+  flex-flow: row nowrap;
+  
+  background: transparent;
+}
+.card button{
+  flex-grow: 1;
+  height: 35px;
+  border: none;
+  border-top: 1px solid var(--borderColor);
+  border-radius: 0px 0px 0px 4px;
+  box-shadow: none;
+}
+.card button:last-of-type{
+  border-radius: 0px 0px 4px 4px;
+}
+.card button+button:last-of-type{
+  border-left: 1px solid var(--borderColor);
+  border-radius: 0px 0px 4px 0px;
+}
+.card button:hover:enabled {
+	background: var(--primary);
+	color: white;
+  border: none;
+	border-top: 1px solid var(--primary);
+	box-shadow: none;
+}
+.blackCard{
+  --primary: var(--background2);
+  --background: var(--primary2);
+  --basicText: var(--background2);
+  color: var(--primary);
+  border-color: var(--background);
+  box-shadow: 0px 0px 4px black;
+}
+/*==================================== spezifische styles ============================================*/
+#blackCardCont{
+  
+}
+
+#scoreBoardCont{
+  
+}
+
+#content_czarWait{
+  
+}
+
+#content_whiteCards{
+  
+}
+#whiteCards{
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+
+
+

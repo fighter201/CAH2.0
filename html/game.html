@@ -1,30 +1,164 @@
+<!DOCTYPE html>
 <html>
-    <head>
+    <head id="head">
+		<title>Game | Cards Against Humanity</title>
+		<link rel="icon" href="img/icon.png" type="images/x-icon">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/cah2.css">
+		<link rel="stylesheet" href="../css/closeCross.css">
+		<link rel="stylesheet" href="../css/game.css">
+		<!--<link rel="stylesheet" href="../css/waitingGamestart_grid.css">-->
+		
+		<script defer src="../js/game_functionality.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         <script> var socket = io('/CAHGame'); </script>
     </head>
 
     <body>
-        GameSeiter 
-        <!-- display created unstarted games -->
-        <!-- passwordcheck -->
-
-        <script>
-            var gameID = window.sessionStorage.getItem('gameID');
-            var playerID = 'defplayer';
-            // var playerID = window.sessionStorage.getItem('playerID');
-            socket.emit('inGame', gameID, playerID);
-            socket.on('roundInfo', function(czar, BC, WC, scoreboard) {
-                //display data
-                if (czar) {
-                    //display Czar waiting screen
-                } else {
-                    //display Slaves choose screen
-                }
-
-            });
-        </script>
-    </body>
-
-    
+		<header>
+			<h1>Cards Against Humanity</h1>
+		</header>
+		<main id="main">
+			
+			<!-- black Card |Scoreboard -> immer sichtbar -->
+			<div class="row"> 
+				<div id="blackCardCont" class="col-3 show">
+					<!-- Card prototype -->
+					<div class="card blackCard">
+						<div class="card_close show"><span class="close"></span></div>
+						<div class="card_text">
+							<span>Hallo ich bin der Inhalt einer schwarzen Karte. Und was denkst du? ____________</span>
+						</div>
+						<div class="card_bottom">
+						
+						</div>
+					</div>
+					
+				</div>
+				<div id="scoreBoardCont" class="col-9 show">
+				
+				</div>
+			</div>
+			
+			<div class="row hline"></div>
+			
+			<!-- Wartebildschirm für Czar -->
+			<div id="content_czarWait" class="col-12 hide">
+				
+			</div>
+			
+			<!-- Slaves legen whiteCards -->
+			<div id="content_whiteCards" class="row show">
+				<div id="whiteCards" class="col-12">
+					<div class="card">
+						<div class="card_close show"><span class="close"></span></div>
+						<div class="card_text">
+							<span>Hallo ich bin der Inhalt einer weissen Karte. Und das sind meine Gedanken.</span>
+						</div>
+						<div class="card_bottom">
+							<button>Play</button>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card_close show"><span class="close"></span></div>
+						<div class="card_text">
+							<span>Hallo ich bin der Inhalt einer weissen Karte. Und das sind meine Gedanken.</span>
+						</div>
+						<div class="card_bottom">
+							<button>Play as 1</button>
+							<button>Play as 2</button>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card_close show"><span class="close"></span></div>
+						<div class="card_text">
+							<span>Hallo ich bin der Inhalt einer weissen Karte. Und das sind meine Gedanken.</span>
+						</div>
+						<div class="card_bottom">
+						
+						</div>
+					</div>
+					<div class="card">
+						<div class="card_close show"><span class="close"></span></div>
+						<div class="card_text">
+							<span>Hallo ich bin der Inhalt einer weissen Karte. Und das sind meine Gedanken.</span>
+						</div>
+						<div class="card_bottom">
+						
+						</div>
+					</div>
+					<div class="card">
+						<div class="card_close show"><span class="close"></span></div>
+						<div class="card_text">
+							<span>Hallo ich bin der Inhalt einer weissen Karte. Und das sind meine Gedanken.</span>
+						</div>
+						<div class="card_bottom">
+						
+						</div>
+					</div>
+					<div class="card">
+						<div class="card_close show"><span class="close"></span></div>
+						<div class="card_text">
+							<span>Hallo ich bin der Inhalt einer weissen Karte. Und das sind meine Gedanken.</span>
+						</div>
+						<div class="card_bottom">
+						
+						</div>
+					</div>
+					<div class="card">
+						<div class="card_close show"><span class="close"></span></div>
+						<div class="card_text">
+							<span>Hallo ich bin der Inhalt einer weissen Karte. Und das sind meine Gedanken.</span>
+						</div>
+						<div class="card_bottom">
+						
+						</div>
+					</div>
+					<div class="card">
+						<div class="card_close show"><span class="close"></span></div>
+						<div class="card_text">
+							<span>Hallo ich bin der Inhalt einer weissen Karte. Und das sind meine Gedanken.</span>
+						</div>
+						<div class="card_bottom">
+						
+						</div>
+					</div>
+					<div class="card">
+						<div class="card_close show"><span class="close"></span></div>
+						<div class="card_text">
+							<span>Hallo ich bin der Inhalt einer weissen Karte. Und das sind meine Gedanken.</span>
+						</div>
+						<div class="card_bottom">
+						
+						</div>
+					</div>
+					<div class="card">
+						<div class="card_close show"><span class="close"></span></div>
+						<div class="card_text">
+							<span>Hallo ich bin der Inhalt einer weissen Karte. Und das sind meine Gedanken.</span>
+						</div>
+						<div class="card_bottom">
+						
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			
+			<!-- Auswahl des Rundengewinners -->
+			
+			<!-- Endscreen -->
+			
+			
+		</main>
+		<footer>
+			<ul>
+			    <li><a href="http://www.lysin-games.com/agb">Allgemeine Gesch&auml;ftsbedingungen</a></li>
+			    <li><a href="http://www.lysin-games.com/datenschutz">Datenschutzerkl&auml;rung</a></li>
+				<li><a href="http://www.lysin-games.com/impressum">Impressum</a></li>
+			</ul>
+		</footer>
+	</body>
 </html>
