@@ -11,7 +11,7 @@ Optik:
         -> Unterschiedliche Ansichten für Host/ Mitspieler ✓
     
     In Arbeit:
-    - Spielseite:
+    - Spielseite: (-> game_functionality.js als Schnittstelle zwischen Engine und Seite)
         - Grundgerüst mit Scoreboard
         
 
