@@ -7,16 +7,17 @@ Optik:
     - joinGame: Liste mit "Lobbynamen" und "Anzahl Spieler/max. Spieler ✓ 
         joinGame_func Zeile 139 aktuelle Anzahl an Spielern (es wird immer 0 von irgendwas angezeigt aber es können ja auch schon Leute in der Lobby sein) -> hab mir erst gedacht, die müssen dann alle über LobbyElement.addPlayer() hinzugefügt werden, aber ergibt Sinn, dass von Anfang an drin zu haben.
     - Lobby warte-Seite: Liste mit Teilnehmer, startbutton, settings(siehe createGame) ✓
+        -> Möglichkeit für Host, Einstellung nochmal zu bearbeiten ✓
+        -> Unterschiedliche Ansichten für Host/ Mitspieler ✓
     
     In Arbeit:
-    
+    - Spielseite:
+        - Grundgerüst mit Scoreboard
         
 
     Ausstehend:
     - createGame (Ergänzungen): optional Zeitbegrenzung für die Runden, input[number] stylen
     - Lobby warte-Seite: eventuell: chat, settings(siehe createGame) vervollständigen
-        -> Möglichkeit für Host, Einstellung nochmal zu bearbeiten, chat usw. währenddessen weiterhin sichtbar
-        -> Unterschiedliche Ansichten für Host/ Mitspieler
     - Spielseite:
         wegen socket.io müssen alle Element in eine html-Datei und werden bei Bedarf ein/ausgeblendet
         auf jeder Seite: Scoreboard
