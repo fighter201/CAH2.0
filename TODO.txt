@@ -11,22 +11,20 @@ Optik:
         -> Unterschiedliche Ansichten für Host/ Mitspieler ✓
     
     In Arbeit:
-    - Spielseite: (-> game_functionality.js als Schnittstelle zwischen Engine und Seite)
-        - Grundgerüst mit Scoreboard
-        
-
-    Ausstehend:
-    - createGame (Ergänzungen): optional Zeitbegrenzung für die Runden, input[number] stylen
-    - Lobby warte-Seite: eventuell: chat, settings(siehe createGame) vervollständigen
     - Spielseite:
         wegen socket.io müssen alle Element in eine html-Datei und werden bei Bedarf ein/ausgeblendet
         auf jeder Seite: Scoreboard
         - Wartebildschirm für Czar: mit BC eventuell: seine WC
-        - Auswahl der WC für Slaves: mit BC(schlage max 5 in einer Reihe vor) und WC
+        - Auswahl der WC für Slaves: mit BC(schlage max 5 in einer Reihe vor) und WC (✓)
         - Auswahl des Gewinners für Czar: BC und alle gelegten WC(es können auch immer 2 WC zusammen gehören)
         - Wartebildschirm für Slaves: BC alle gelegten WC
         - Gewinnerdisplay:
         - Endbildschirm: Scoreboard
+
+    Ausstehend:
+    - createGame (Ergänzungen): optional Zeitbegrenzung für die Runden, input[number] stylen
+    - Lobby warte-Seite: eventuell: chat, settings(siehe createGame) vervollständigen
+    
         
     Für den Schluss/ wenn noch Zeit übrig ist:
     - dark Mode -> über Dropdownmenu in header einstellbar
