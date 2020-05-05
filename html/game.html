@@ -11,6 +11,7 @@
 		<link rel="stylesheet" href="../css/game.css">
 		<!--<link rel="stylesheet" href="../css/waitingGamestart_grid.css">-->
 		
+		<script defer src="../js/usefulFunctions.js"></script>
 		<script defer src="../js/game_functionality.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         <script> var socket = io('/CAHGame'); </script>
@@ -38,19 +39,25 @@
 					
 				</div>
 				<div id="scoreBoardCont" class="col-9 show">
-				
+					<table id="scoreboard">
+						<tr>
+							<th class="nameCell" id="playerHead">Player</th>
+							<th class="scoreCell" id="pointHead">Score</th>
+							<th class="rankCell" id="rankHead">Ranking</th>
+						</tr>
+					</table>
 				</div>
 			</div>
 			
 			<div class="row hline"></div>
 			
 			<!-- Wartebildschirm für Czar -->
-			<div id="content_czarWait" class="col-12 hide">
-				
+			<div id="content_czarWait" class="col-12 show">
+				<h3>Wait for players to choose a card ...</h3>
 			</div>
 			
 			<!-- Slaves legen whiteCards -->
-			<div id="content_whiteCards" class="row show">
+			<div id="content_whiteCards" class="row hide">
 				<div id="whiteCards" class="col-12">
 					<div class="card">
 						<div class="card_close show"><span class="close"></span></div>

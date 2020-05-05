@@ -71,7 +71,14 @@
 }
 
 #content_czarWait{
-  
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+}
+#content_czarWait h3{
+  padding-top: 6px;
+  padding-bottom: 20px;
 }
 
 #content_whiteCards{
