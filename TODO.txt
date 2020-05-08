@@ -13,11 +13,11 @@ Optik:
         - auf jeder Seite: Scoreboard, mit Rankingfunktion ✓
         - Wartebildschirm für Czar: mit BC (eventuell: seine WC) ✓
         - Auswahl der WC für Slaves: mit BC(schlage max 5 in einer Reihe vor) und WC (✓)
+        - Cards htmlElemente über js erzeugen ✓
     
     In Arbeit:
     - Spielseite:
         wegen socket.io müssen alle Element in eine html-Datei und werden bei Bedarf ein/ausgeblendet
-        - Cards htmlElemente über js erzeugen
         - Auswahl des Gewinners für Czar: BC und alle gelegten WC(es können auch immer 2 WC zusammen gehören)
         - Wartebildschirm für Slaves: BC alle gelegten WC
         - Gewinnerdisplay:

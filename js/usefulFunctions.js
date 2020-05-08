@@ -20,6 +20,14 @@ HTMLElement.prototype.addClasses = function(classes){
 		if(!this.classList.contains(classes[x])) this.classList.add(classes[x]);
 	}
 };
+HTMLElement.prototype.switchClass = function(adding, removing){
+	if(this.classList.contains(removing)) this.classList.remove(removing);
+	if(this.classList.contains(adding)) this.classList.remove(adding);
+	this.addClass(adding);
+};
+HTMLElement.prototype.removeClass = function(theClass){
+	if(this.classList.contains(theClass)) this.classList.remove(theClass);
+};
 function switchClass(element, adding, removing){
 	if(element.classList.contains(removing)) element.classList.remove(removing);
 	if(element.classList.contains(adding)) element.classList.remove(adding);
