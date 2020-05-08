@@ -56,7 +56,7 @@ main{
   color: rgba(0, 0, 0, 0.5);
 }
 #playerList{
-  overflow-y: scroll;
+  overflow-y: auto;
   padding-left: 0px;
   padding-right: 10px;
   max-height: 330px;

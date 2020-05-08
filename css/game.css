@@ -1,7 +1,14 @@
+:root{
+  --cardHeight: 230px;
+  --cardWidth: 250px;
+}
+*{
+  box-sizing: border-box;
+}
 /*==================================== allgemeine styles ============================================*/
 .card{
-  width: 250px;
-  height: 230px;
+  width: var(--cardWidth);
+  height: var(--cardHeight);
   border: 1px solid #CBCBCB; /*var(--borderColor)*/
   border-radius: 4px;
   box-shadow: 0px 0px 4px var(--boxShadow); /*var(--boxShadow)*/
@@ -67,7 +74,40 @@
 }
 
 #scoreBoardCont{
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: var(--cardHeight);
+  background: transparent;
+}
+#scoreboard{
+	border-collapse: collapse;
+	/*border: 1px solid black;*/
+	width: 55%;
+	margin: 5px 15px;
+}
+#scoreboard th{
+	height: 30px;
+	border-bottom: 2px solid var(--basicText);
+}
+#scoreboard td{
+	height: 23px;
+	vertical-align: bottom;
+}
+tr>td+td{
+  text-align: center;
+}
+.nameCell{
+  text-align: left;
+}
+.scoreCell, .rankCell{
+  min-width: 60px;
+}
+#scoreboard>tr .nameCell span{
+  text-overflow: ellipsis;
+}
+.first, .first>td, .first>td>span{
+  color: var(--right);
 }
 
 #content_czarWait{
