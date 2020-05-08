@@ -77,14 +77,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: var(--cardHeight);
   background: transparent;
+  min-height: 260px;
+}
+#scoreBoardBorder{
+  box-sizing: content-box;
+	width: 55%;
+  padding: 20px;
+  border: 1px solid var(--borderColor);
+  border-radius: 6px;
+  max-height: 175px;
+  overflow-x: auto;
 }
 #scoreboard{
 	border-collapse: collapse;
 	/*border: 1px solid black;*/
-	width: 55%;
-	margin: 5px 15px;
+  padding: 20px;
+  width: 100%;
+  /*border: 1px solid var(--borderColor);*/
 }
 #scoreboard th{
 	height: 30px;

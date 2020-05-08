@@ -24,7 +24,7 @@
 		<main id="main">
 			
 			<!-- black Card |Scoreboard -> immer sichtbar -->
-			<div class="row"> 
+			<div id="content_blackScore" class="row"> 
 				<div id="blackCardCont" class="col-3 show">
 					<!-- Card prototype -->
 					<div class="card blackCard">
@@ -39,6 +39,7 @@
 					
 				</div>
 				<div id="scoreBoardCont" class="col-9 show">
+					<div id="scoreBoardBorder">
 					<table id="scoreboard">
 						<tr>
 							<th class="nameCell" id="playerHead">Player</th>
@@ -46,10 +47,11 @@
 							<th class="rankCell" id="rankHead">Ranking</th>
 						</tr>
 					</table>
+					</div>
 				</div>
 			</div>
 			
-			<div class="row hline"></div>
+			<div id="divide_afterBlackScore" class="row hline"></div>
 			
 			<!-- Wartebildschirm für Czar -->
 			<div id="content_czarWait" class="col-12 show">
@@ -59,105 +61,23 @@
 			<!-- Slaves legen whiteCards -->
 			<div id="content_whiteCards" class="row hide">
 				<div id="whiteCards" class="col-12">
-					<div class="card">
-						<div class="card_close show"><span class="close"></span></div>
-						<div class="card_text">
-							<span>Hallo ich bin der Inhalt einer weissen Karte. Und das sind meine Gedanken.</span>
-						</div>
-						<div class="card_bottom">
-							<button>Play</button>
-						</div>
-					</div>
-					<div class="card">
-						<div class="card_close show"><span class="close"></span></div>
-						<div class="card_text">
-							<span>Hallo ich bin der Inhalt einer weissen Karte. Und das sind meine Gedanken.</span>
-						</div>
-						<div class="card_bottom">
-							<button>Play as 1</button>
-							<button>Play as 2</button>
-						</div>
-					</div>
-					<div class="card">
-						<div class="card_close show"><span class="close"></span></div>
-						<div class="card_text">
-							<span>Hallo ich bin der Inhalt einer weissen Karte. Und das sind meine Gedanken.</span>
-						</div>
-						<div class="card_bottom">
-						
-						</div>
-					</div>
-					<div class="card">
-						<div class="card_close show"><span class="close"></span></div>
-						<div class="card_text">
-							<span>Hallo ich bin der Inhalt einer weissen Karte. Und das sind meine Gedanken.</span>
-						</div>
-						<div class="card_bottom">
-						
-						</div>
-					</div>
-					<div class="card">
-						<div class="card_close show"><span class="close"></span></div>
-						<div class="card_text">
-							<span>Hallo ich bin der Inhalt einer weissen Karte. Und das sind meine Gedanken.</span>
-						</div>
-						<div class="card_bottom">
-						
-						</div>
-					</div>
-					<div class="card">
-						<div class="card_close show"><span class="close"></span></div>
-						<div class="card_text">
-							<span>Hallo ich bin der Inhalt einer weissen Karte. Und das sind meine Gedanken.</span>
-						</div>
-						<div class="card_bottom">
-						
-						</div>
-					</div>
-					<div class="card">
-						<div class="card_close show"><span class="close"></span></div>
-						<div class="card_text">
-							<span>Hallo ich bin der Inhalt einer weissen Karte. Und das sind meine Gedanken.</span>
-						</div>
-						<div class="card_bottom">
-						
-						</div>
-					</div>
-					<div class="card">
-						<div class="card_close show"><span class="close"></span></div>
-						<div class="card_text">
-							<span>Hallo ich bin der Inhalt einer weissen Karte. Und das sind meine Gedanken.</span>
-						</div>
-						<div class="card_bottom">
-						
-						</div>
-					</div>
-					<div class="card">
-						<div class="card_close show"><span class="close"></span></div>
-						<div class="card_text">
-							<span>Hallo ich bin der Inhalt einer weissen Karte. Und das sind meine Gedanken.</span>
-						</div>
-						<div class="card_bottom">
-						
-						</div>
-					</div>
-					<div class="card">
-						<div class="card_close show"><span class="close"></span></div>
-						<div class="card_text">
-							<span>Hallo ich bin der Inhalt einer weissen Karte. Und das sind meine Gedanken.</span>
-						</div>
-						<div class="card_bottom">
-						
-						</div>
-					</div>
+					
+					<!-- automatisch eingefügte whiteCards -->
 					
 				</div>
 			</div>
 			
 			<!-- Auswahl des Rundengewinners -->
+			<div id="content_chooseWinner" class="row hide">
+				<div id="chooseCards" class="col-12">
+					
+				</div>
+			</div>
 			
 			<!-- Endscreen -->
+			<div id="content_endscreen" class="row hide">
 			
+			</div>
 			
 		</main>
 		<footer>
