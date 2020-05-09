@@ -53,6 +53,10 @@
   border-left: 1px solid var(--borderColor);
   border-radius: 0px 0px 4px 0px;
 }
+.card button+button:not(first-of-type){
+  border-left: 1px solid var(--borderColor);
+  border-radius: 0px 0px 0px 0px;
+}
 .card button:hover:enabled {
 	background: var(--primary);
 	color: white;

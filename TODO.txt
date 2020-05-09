@@ -12,13 +12,13 @@ Optik:
     - Spielseite:
         - auf jeder Seite: Scoreboard, mit Rankingfunktion ✓
         - Wartebildschirm für Czar: mit BC (eventuell: seine WC) ✓
-        - Auswahl der WC für Slaves: mit BC(schlage max 5 in einer Reihe vor) und WC (✓)
+        - Auswahl der WC für Slaves: mit BC(schlage max 5 in einer Reihe vor) und WC ✓
         - Cards htmlElemente über js erzeugen ✓
     
     In Arbeit:
     - Spielseite:
         wegen socket.io müssen alle Element in eine html-Datei und werden bei Bedarf ein/ausgeblendet
-        - Auswahl des Gewinners für Czar: BC und alle gelegten WC(es können auch immer 2 WC zusammen gehören)
+        - Auswahl des Gewinners für Czar: BC und alle gelegten WC(es können auch immer 2 WC zusammen gehören) -> anderen button für czar einbauen
         - Wartebildschirm für Slaves: BC alle gelegten WC
         - Gewinnerdisplay:
         - Endbildschirm: Scoreboard
@@ -32,8 +32,8 @@ Optik:
     - dark Mode -> über Dropdownmenu in header einstellbar
     - Nickname im Header anzeigen
     - Möglichkeit, Lobby offen oder geschlossen (mit Whitelist) zu erstellen
-    - burnrunde
-    - blank cards
+    - burnrunde -> Möglichkeit, die Karten zu entfernen ist in game_functionality.js eingebaut, noch nicht funktionsfähig
+    - blank cards -> Möglichkeit ist in game_functionality.js eingebaut
     - packages erstellen(custom WC,BC)
 
     Für den Schluss vom Schluss:
@@ -44,6 +44,14 @@ Optik:
 Engine:
     - createGame:
         - alles was sonst noch nötig ist -> Einstellungen abspeichern, hinterlegte CardSets einfüttern, ... ✓
+    - Spielseite:
+        - (am besten zusammen) game_functionality.js, Game.js, Player.js irgendwie zusammenwurschteln
+    - Generell:
+        - Bei mir kommt immer die Fehlermeldung:
+            'ReferenceError: io is not defined' in game.html
+            bzw.
+            'TypeError: socket is undefined' in game_functionality.js
+        -> fehlen da einfach noch Ordner auf gitHub?
     
 Laden von den Packages:
     Der Datenbankzugriff auf der client Seite muss mit php gemacht werden nicht js(problem ist auf der client Seite gibt es kein "require" was man für die db verbindung braucht).
