@@ -7,23 +7,7 @@ const joinGameUrl = 'joinGame.html';
 const createGameUrl = 'createGame.html';
 let nickname;
 
-//useful functions ================================================
-function empty(string){
-	console.log("empty()");
-	return (string.length === 0 || !string.trim());
-}
-
-function addClass(element, theClass){
-	if(!element.classList.contains(theClass)) element.classList.add(theClass);
-}
-function switchClass(element, adding, removing){
-	if(element.classList.contains(removing)) element.classList.remove(removing);
-	addClass(element, adding);
-}
-function removeClass(element, theClass){
-	if(element.classList.contains(theClass)) element.classList.remove(theClass);
-}
-//=================================================================
+//requires usefulFunctions.js
 
 function checkNickname(){
 	// console.log("nickname:"+inputNickname.value);

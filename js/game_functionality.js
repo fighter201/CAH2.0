@@ -280,21 +280,23 @@ function Card(text, index, burnable){
 	});
 }
 
-/*
-var gameID = window.sessionStorage.getItem('gameID');
-    var playerID = 'defplayer';
-    // var playerID = window.sessionStorage.getItem('playerID');
-    socket.emit('inGame', gameID, playerID);
-    socket.on('roundInfo', function(czar, BC, WC, scoreboard) {
-        //display data
-        if (czar) {
-            //display Czar waiting screen
-        } else {
-            //display Slaves choose screen
-        }
+try {
+	var gameID = window.sessionStorage.getItem('gameID');
+	var playerID = 'defplayer';
+	// var playerID = window.sessionStorage.getItem('playerID');
+	socket.emit('inGame', gameID, playerID);
+	socket.on('roundInfo', function (czar, BC, WC, scoreboard) {
+		//display data
+		if (czar) {
+			//display Czar waiting screen
+		} else {
+			//display Slaves choose screen
+		}
+	});
+}catch(e){
+	console.log(e);
+}
 
-});
-*/
 
 function addCard(cardText, container){
 	var newCard = new Card(cardText, gc.whiteCards.length, gc.burnable);

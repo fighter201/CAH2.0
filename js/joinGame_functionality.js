@@ -8,28 +8,7 @@ var myLobbys = [];
 var chosenLobby;
 //68
 
-//useful functions ================================================
-String.prototype.isEmpty = function(){
-	return (this.length === 0 || !this.trim());
-};
-function addClass(element, theClass){
-	if(!element.classList.contains(theClass)) element.classList.add(theClass);
-}
-function switchClass(element, adding, removing){
-	if(element.classList.contains(removing)) element.classList.remove(removing);
-	if(element.classList.contains(adding)) element.classList.remove(adding);
-	addClass(element, adding);
-}
-function removeClass(element, theClass){
-	if(element.classList.contains(theClass)) element.classList.remove(theClass);
-}
-function htmlElement(type, id, innerHTML){
-	var theElement = document.createElement(type);
-	if(typeof id !== "undefined") theElement.id = id;
-	if(typeof innerHTML !== "undefined") theElement.innerHTML = innerHTML;
-	return theElement;
-}
-//=================================================================
+//requires usefulFunctions.js
 
 function updateMainMinSize(increase){
 	console.log("myLobbys length:"+myLobbys.length);
