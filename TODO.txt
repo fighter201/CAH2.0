@@ -46,6 +46,7 @@ Engine:
         - alles was sonst noch nötig ist -> Einstellungen abspeichern, hinterlegte CardSets einfüttern, ... ✓
     - Spielseite:
         - (am besten zusammen) game_functionality.js, Game.js, Player.js irgendwie zusammenwurschteln
+            -> Scoreboard ranking serverseitig -> aus Funktion Scoreboard.doRanking() (game_functionality.js), entsprechende Funktion nur noch für Aktualisierung der Grafik nutzen
     - Generell:
         - Bei mir kommt immer die Fehlermeldung:
             'ReferenceError: io is not defined' in game.html

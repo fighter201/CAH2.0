@@ -141,7 +141,8 @@ function GameContainer(){
 	this.blackCard = "default black Card";
 	this.answerNum = 0;
 	this.burnable = true;
-	this.whiteCards = [];
+	this.whiteCards_slaveChoice = [];
+	this.whiteCards_czarChoice = [];
 	this.czar = false;
 	this.blankCardsAllowed = false;
 	
@@ -164,58 +165,120 @@ function GameContainer(){
 		else{ e.switchClass('hide', 'show'); }
 		console.log("setVisible -> "+elementName+":"+status);
 	}
-	this.getWhiteCard = function(index){
-		if(index > this.whiteCards.length) return;
-		return this.whiteCards[index];
+	this.getWhiteCard_slaveChoice = function(index){
+		if(index > this.whiteCards_slaveChoice.length) return;
+		return this.whiteCards_slaveChoice[index];
+	}
+	this.getWhiteCard_czarChoice = function(index){
+		if(index > this.whiteCards_czarChoice.length) return;
+		return this.whiteCards_czarChoice[index];
 	}
 	this.setBlackCard = function(text, answerNum){
 		this.blackCard = text;
 		this.answerNum = answerNum;
 		document.getElementById('blackCardText').innerHTML = text;
-		for(x in this.whiteCards) this.whiteCards[x].applyAnswerPossibilities();
+		for(x in this.whiteCards_slaveChoice) this.whiteCards_slaveChoice[x].applyAnswerPossibilities();
 		//evtl: wenn Zeichenlänge überschritten wird, Schrift kleiner machen
 	}
 	this.setBurnable = function(burnable){
 		this.burnable = burnable;
 	}
 }
-function Card(text, index, burnable){
-	this.text = "Hallo ich bin der Inhalt einer weissen Karte. Und das sind meine Gedanken.";
-	this.burnable = true;  //based on game settings
-	this.index = -1;
-	this.answerNum = 0;
-	
-	this.text = text;
-	this.burnable = burnable;
-	this.index = index;
-	
-	//Generate HTMLElements
-	var divCard = htmlElement('div', "card_"+this.index);
-	var divClose = htmlElement('div');
-	this.spanClose = htmlElement('span', "card_"+this.index);
-	var divText = htmlElement('div');
-	var spanText = htmlElement('span', "", this.text);
-	this.divBottom = htmlElement('div');
-	this.button1;
-	this.button2;
-	this.button3;
-	
-	divCard.addClass('card');
-	divClose.addClass('card_close');
-	if(this.burnable) divClose.addClass('show');
-	this.spanClose.addClass('close');
-	divText.addClass('card_text');
-	this.divBottom.addClass('card_bottom');
-	
-	divClose.appendChild(this.spanClose);
-	divText.appendChild(spanText);
-	divCard.appendChild(divClose);
-	divCard.appendChild(divText);
-	divCard.appendChild(this.divBottom);
-	this.html = divCard;
-	
-	//Methoden
-	this.applyAnswerPossibilities = function(){
+
+class Card{
+	text = "Hallo ich bin der Inhalt einer weissen Karte. Und das sind meine Gedanken.";
+	burnable = true;  //based on game settings
+	index = -1;
+	answerNum = 0;
+
+	//genutzte html-Elemente
+	spanClose;
+	divBottom;
+
+	constructor(text, index, burnable) {
+		this.text = text;
+		this.burnable = burnable;
+		this.index = index;
+
+		console.log("contruct Card2:"+this.text);
+
+		//Generate HTMLElements
+		var divCard = htmlElement('div', "card_"+this.index);
+		var divClose = htmlElement('div');
+		this.spanClose = htmlElement('span', "card_"+this.index);
+		var divText = htmlElement('div');
+		var spanText = htmlElement('span', "", this.text);
+		this.divBottom = htmlElement('div');
+
+		divCard.addClass('card');
+		divClose.addClass('card_close');
+		this.spanClose.addClass('close');
+		if(!this.burnable) this.spanClose.addClass('hide');
+		divText.addClass('card_text');
+		this.divBottom.addClass('card_bottom');
+
+		divClose.appendChild(this.spanClose);
+		divText.appendChild(spanText);
+		divCard.appendChild(divClose);
+		divCard.appendChild(divText);
+		divCard.appendChild(this.divBottom);
+		this.html = divCard;
+	}
+
+}
+class Czar_Card extends Card {
+
+	constructor(text, index) {
+		super(text, index, false);
+	}
+
+}
+function ChooseCardDiv(card1, index, card2){
+	this.firstCard;
+	this.secondCard;
+
+	//Div erzeugen
+	var cardCont = htmlElement('div', "singleCard_"+index);
+	this.firstCard = new Czar_Card(card1, index);
+	cardCont.appendChild(this.firstCard.html);
+
+	try{
+		if(card2) {
+			this.secondCard = new Czar_Card(card2, index);
+			cardCont.appendChild(this.secondCard.html);
+		}
+	}catch (e) {
+		console.log("No second card available: "+e);
+	}
+
+	this.btn = htmlElement('button', 'card_'+index, "Choose as winner");
+	cardCont.appendChild(this.btn);
+	this.html = cardCont;
+
+	this.btn.addEventListener('click', function(){
+		try {
+			var cardText = gc.getWhiteCard_czarChoice(parseInt(this.id.substring(this.id.indexOf("_") + 1)));
+			console.log("pressed choose button on: " + cardText);
+		}catch (e) {
+			console.log("Couldn't get text of chosen Whitecard: "+e);
+		}
+	});
+}
+class Slave_Card extends Card {
+	//Buttons zum Auswählen
+	button1;
+	button2;
+
+	constructor(text, index, burnable) {
+		super(text, index, burnable);
+
+		this.spanClose.addEventListener('click', function(){
+			var cardText = gc.getWhiteCard_slaveChoice(parseInt(this.id.substring(this.id.indexOf("_")+1))).text;
+			console.log("pressed spanClose on: "+cardText);
+		});
+	}
+
+	applyAnswerPossibilities(){
 		if(this.button1){
 			this.divBottom.removeChild(this.button1);
 			delete this.button1;
@@ -223,10 +286,6 @@ function Card(text, index, burnable){
 		if(this.button2){
 			this.divBottom.removeChild(this.button2);
 			delete this.button2;
-		}
-		if(this.button3){
-			this.divBottom.removeChild(this.button3);
-			delete this.button3;
 		}
 		switch(gc.answerNum){
 			case 0:
@@ -241,45 +300,27 @@ function Card(text, index, burnable){
 				this.divBottom.appendChild(this.button1);
 				this.divBottom.appendChild(this.button2);
 				break;
-			case 3:
-				this.button1 = htmlElement('button', "card_"+this.index, "Play 1");
-				this.button2 = htmlElement('button', "card_"+this.index, "Play 2");
-				this.button3 = htmlElement('button', "card_"+this.index, "Play 3");
-				this.divBottom.appendChild(this.button1);
-				this.divBottom.appendChild(this.button2);
-				this.divBottom.appendChild(this.button3);
-				break;
 			default:
-				console.log("setAnserNum("+num+") failed");
+				console.log("setAnswerNum("+gc.answerNum+") failed");
 				break;
 		}
-		
+
 		if(this.button1){
 			this.button1.addEventListener('click', function(){
-				var cardText = gc.getWhiteCard(parseInt(this.id.substring(this.id.indexOf("_")+1))).text;
+				var cardText = gc.getWhiteCard_slaveChoice(parseInt(this.id.substring(this.id.indexOf("_")+1))).text;
 				console.log("pressed button1 on: "+cardText);
 			});
 		}
 		if(this.button2){
 			this.button2.addEventListener('click', function(){
-				var cardText = gc.getWhiteCard(parseInt(this.id.substring(this.id.indexOf("_")+1))).text;
-				console.log("pressed button2 on: "+this.text);
-			});
-		}
-		if(this.button3){
-			this.button3.addEventListener('click', function(){
-				var cardText = gc.getWhiteCard(parseInt(this.id.substring(this.id.indexOf("_")+1))).text;
-				console.log("pressed button3 on: "+this.text);
+				var cardText = gc.getWhiteCard_slaveChoice(parseInt(this.id.substring(this.id.indexOf("_")+1))).text;
+				console.log("pressed button2 on: "+cardText);
 			});
 		}
 	}
-	
-	this.spanClose.addEventListener('click', function(){
-		var cardText = gc.getWhiteCard(parseInt(this.id.substring(this.id.indexOf("_")+1))).text;
-		console.log("pressed spanClose on: "+cardText);
-	});
 }
 
+//===============================================================================================
 try {
 	var gameID = window.sessionStorage.getItem('gameID');
 	var playerID = 'defplayer';
@@ -296,24 +337,46 @@ try {
 }catch(e){
 	console.log(e);
 }
+//================================================================================================
 
-
-function addCard(cardText, container){
-	var newCard = new Card(cardText, gc.whiteCards.length, gc.burnable);
+function addCard_slaveChoice(cardText){
+	var newCard = new Slave_Card(cardText, gc.whiteCards_slaveChoice.length, gc.burnable);
 	newCard.applyAnswerPossibilities();
-	container.appendChild(newCard.html);
-	gc.whiteCards.push(newCard);
+	gc.whiteCardContainer.appendChild(newCard.html);
+	gc.whiteCards_slaveChoice.push(newCard);
 }
 //								string[]
 function addCards_slaveWhiteCards(cards){
-	for(x in cards) addCard(cards[x], gc.whiteCardContainer);
+	for(x in cards) addCard_slaveChoice(cards[x]);
 }
-function addCards_chooseWinner(cards){
+function addCards_chooseWinner(cardGroups, cardsPerPlayer){
 	gc.answerNum = 0;
-	for(x in cards) addCard(cards[x], gc.chooseCardContainer);
+	gc.setBurnable(false);
+
+	switch (cardsPerPlayer){
+		case 1:
+			for(x in cardGroups){
+				let newCont = new ChooseCardDiv(cardGroups[x], x);
+				gc.chooseCardContainer.appendChild(newCont.html);
+				gc.whiteCards_czarChoice.push(cardGroups[x]);
+			}
+			break;
+		case 2:
+			for(x in cardGroups){
+				//gc.chooseCardContainer
+				var newDouble = new ChooseCardDiv(cardGroups[x][0], x, cardGroups[x][1]);
+				gc.chooseCardContainer.appendChild(newDouble.html);
+				gc.whiteCards_czarChoice.push(cardGroups[x]);
+			}
+			break;
+		default:
+			console.log("Failed to generate ChooseCardDivs");
+			break;
+	}
+
 }
 function addCustomCard(customText){ //für blank Cards
-	if(gc.blankCardsAllowed) addCard(customText, gc.whiteCardContainer);
+	if(gc.blankCardsAllowed) addCard_slaveChoice(customText, gc.whiteCardContainer);
 }
 
 function setMode_slaveWhiteCards(){
@@ -353,22 +416,58 @@ function setMode_endscreen(){
 	gc.setVisible("divide_afterBlackScore", false);
 }
 
+//Einfach weils geht
+function* counting(start){
+	var x = start;
+	while(true) yield x++;
+}
+
 window.onload = function(){
 	gc = new GameContainer();
 	
 	//Generate test players
-	sb = new ScoreBoard(["Player1", "Player2", "dritterSpieler", "der schlechteste Spieler ever!!!"]);
+	var cnt1 = counting(1);
+	let players1 = [];
+	for(let i = 0; i<10; i++) players1.push("Player"+cnt1.next().value);
+	let players2 = ["Player1", "Player2", "dritterSpieler", "der schlechteste Spieler ever!!!"];
+	sb = new ScoreBoard(players1);
 	sb.addPlayer("ich bin auch dabei");
 	for(let i = 0; i<2; i++){ sb.getPlayer("Player2").increaseScore();}
 	for(let i = 0; i<3; i++){ sb.getPlayer("ich bin auch dabei").increaseScore();}
-	sb.getPlayer("dritterSpieler").increaseScore();
+	sb.getPlayer("Player1").increaseScore();
 	sb.addPoint("Player1");
-	
-	//init round (white cards legen)
+
+	//init round (white cards legen slaves)
 	setMode_slaveWhiteCards();
 	gc.setBlackCard("Das hier ________ ist eine automatisch generierte schwarze Karte ________ .", 2);
+	gc.setBurnable(true); //basierend auf Settings
+/*
 	addCards_slaveWhiteCards(["Ich bin die erste Karte.",
 	 						"ich passe nicht in die Lücke, aber bin trotzdem hier.",
 	 						"Hallo, das ist die am besten passende Karte",
-	 						"Und zu guter letzt noch eine weitere nutzlose Karte"]);
+	 						"Und zu guter letzt noch eine weitere nutzlose Karte"]); //input von Server
+*/
+
+	//gelegte Karten generieren (1 Antwort)
+	var anzahlPlayer = 10;
+	var cards1 = [];
+	cards1.push("Das ist die erste witzige Karte");
+	cards1.push("Die zweite Karte ist leider einfach nur unpassend");
+	cards1.push("Das ist wohl die beste Karte");
+	var cnt2 = counting(4);
+	for(let i = 0; i<(anzahlPlayer-3); i++) cards1.push("Karte"+cnt2.next().value);
+
+	//gelegte Karten generieren (2 Antworten)
+	var cards2 = [];
+	for(let i = 1; i <= anzahlPlayer; i++){
+		let card1 = "erste Karte von Player"+i;
+		let card2 = "zweite Karte von Player"+i;
+		let cardGroup = [card1, card2];
+		cards2.push(cardGroup);
+	}
+
+	//init round (white cards auswählen czar)
+	setMode_chooseWinner();
+	addCards_chooseWinner(cards2, 2);
+
 };

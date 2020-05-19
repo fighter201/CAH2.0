@@ -145,6 +145,25 @@ tr>td+td{
   justify-content: space-around;
 }
 
+#chooseCards{
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+#chooseCards>div{
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0px 20px;
+}
+#chooseCards button{
+  width: 100px;
+}
+[id*="singleCard_"]{
+  
+}
 
 
 
