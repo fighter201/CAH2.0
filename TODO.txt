@@ -55,9 +55,11 @@ Engine:
         -> fehlen da einfach noch Ordner auf gitHub?
         
         sry erstmal das ich in letzer Zeit so inaktiv bin. Uni und so... Aber ich hab das Projekt nicht vergessen.
+        -> kein Stress, das läuft ja nicht davon
         Die Fehlermeldung gehört zu den socket.io(Echtzeit Infoaustausch-Bibliothek). Die Ordner sind nicht auf github.
         Damit die sockets funktionieren muss man erst die server3.js ausführen(server starten) und dann im browser mit localhost usw. ein http-request schicken.
         Mit xammp direkt geht das glaub ich nicht.
+        -> Dann würd ich bei nächster Gelegenheit (bzw. dann auch generell) den ganzen Code in js der damit was am Hut hat mit try-catch-Blöcken verarzten, könnte ja dann auch mal so sein das was mit dem Server nicht klappt und dann schmiert uns wenigstens nicht das ganze js ab.
     
 Laden von den Packages:
     Der Datenbankzugriff auf der client Seite muss mit php gemacht werden nicht js(problem ist auf der client Seite gibt es kein "require" was man für die db verbindung braucht).
