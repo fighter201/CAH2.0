@@ -44,13 +44,17 @@ function savePlayer(nextPage){
 	
 	var nickname = window.sessionStorage.getItem('nickname');
 	console.log(nickname);
-	var socket = io('/DB');
-	
-	socket.emit('newPlayer', nickname);
-	socket.on('newPlayerID', function(newPlayerID){
-		window.sessionStorage.setItem('playerID', newPlayerID);
-		window.location.href = nextPage;
-	})
+	try {var socket = io('/DB');}
+	catch (e){
+		console.log(e)
+	}
+	if (socket != undefined){
+		socket.emit('newPlayer', nickname);
+		socket.on('newPlayerID', function(newPlayerID){
+			window.sessionStorage.setItem('playerID', newPlayerID);
+			window.location.href = nextPage;
+		})
+	}
 }
 
 //nickname to sessionvariable

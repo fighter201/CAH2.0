@@ -87,10 +87,15 @@ function createLobby() {
 	else{ switchClass(numbError, 'hide', 'show');}
 
 	var settings = extractSettings();
-	var socket = io('/lobby');
+	try{var socket = io('/lobby')}
+	catch (e){
+		console.log(e.message)
+	}
 	var playerID = window.sessionStorage.getItem('playerID');
 	var nickname = window.sessionStorage.getItem('nickname');
-	socket.emit('createLobby', settings, playerID, nickname);
+	if(socket != undefined){
+		socket.emit('createLobby', settings, playerID, nickname);
+	}
 	window.sessionStorage.setItem('master', true);
 }
 
@@ -115,13 +120,18 @@ function extractSettings() {
 }
 
 function loadPackages(){
-	var dbSocket = io('/DB');
-	dbSocket.emit('packagesReq');
-	dbSocket.on('packages', function(result) {
-		result.forEach(element => {
-			addCardSet(element.name);
+	try {var dbSocket = io('/DB');}
+	catch (e){
+		console.log(e.message)
+	}
+	if (dbSocket != undefined){
+		dbSocket.emit('packagesReq');
+		dbSocket.on('packages', function(result) {
+			result.forEach(element => {
+				addCardSet(element.name);
+			});
 		});
-	});
+	}
 }
 
 btnApply.addEventListener('click', createLobby);

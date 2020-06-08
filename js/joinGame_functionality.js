@@ -131,14 +131,19 @@ btnCreateGame.addEventListener('click', function(){
 });
 
 function loadLobbys() {
-	var dbSocket = io('/DB');
-	dbSocket.emit('lobbyReq');
-	dbSocket.on('lobbys', function(lobbys) {
-		console.log(lobbys);
-		lobbys.forEach(lobby => {
-			addLobby(lobby.name, lobby.master, lobby.numPlayer, lobby.maxPlayer);
+	try {var dbSocket = io('/DB')}
+	catch (e){
+		console.log(e.message)
+	}
+	if (dbSocket != undefined){
+		dbSocket.emit('lobbyReq');
+		dbSocket.on('lobbys', function(lobbys) {
+			console.log(lobbys);
+			lobbys.forEach(lobby => {
+				addLobby(lobby.name, lobby.master, lobby.numPlayer, lobby.maxPlayer);
+			});
 		});
-	});
+	}
 }
 
 function join(gameID){
